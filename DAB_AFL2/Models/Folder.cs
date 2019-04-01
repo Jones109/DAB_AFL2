@@ -5,12 +5,10 @@ using System.Text;
 
 namespace DAB_AFL2.Models
 {
-    public class Course
+    public class Folder
     {
-        public string CourseName { get; set; }
         [Key]
-        public int CourseId { get; set; }
+        public int FolderId { get; set; }
 
-        public List<Teacher> Teachers { get; set; }
     }
 }
