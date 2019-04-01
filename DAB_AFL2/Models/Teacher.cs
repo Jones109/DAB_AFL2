@@ -15,6 +15,8 @@ namespace DAB_AFL2.Models
         [MaxLength(128)]
         public string Name { get; set; }
         
+        //Course Relation
+        public List<Teacher_Courses> Teacher_Courses { get; set; }
 
     }
 }

@@ -7,8 +7,12 @@ namespace DAB_AFL2.Models
 {
     public class Course
     {
-        public string CourseName { get; set; }
         [Key]
         public int CourseId { get; set; }
+        [MaxLength(128)]
+        public string CourseName { get; set; }
+
+        //Many-to-many
+        public List<Teacher_Courses> Teacher_Courses { get; set; }
     }
 }
