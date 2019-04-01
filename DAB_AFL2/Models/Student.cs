@@ -4,12 +4,12 @@ using System.Text;
 
 namespace DAB_AFL2.Models
 {
-    class Student
+    public class Student
     {
-        public DateTime EnrollDate;
-        public int StudentID;
-        public string Name;
-        public DateTime Birthday;
-        public DateTime GraduateDate;
+        public DateTime EnrollDate { get; set; }
+        public int StudentID { get; set; }
+        public string Name { get; set; }
+        public DateTime Birthday { get; set; }
+        public DateTime GraduateDate { get; set; }
     }
 }
