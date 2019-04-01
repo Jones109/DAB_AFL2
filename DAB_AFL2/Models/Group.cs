@@ -4,10 +4,10 @@ using System.Text;
 
 namespace DAB_AFL2.Models
 {
-    class Group
+    public class Group
     {
-        public int Grade;
-        public int GroupId;
-        public int GroupSize;
+        public int Grade { get; set; }
+        public int GroupId { get; set; }
+        public int GroupSize { get; set; }
     }
 }
