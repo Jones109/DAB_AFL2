@@ -14,14 +14,13 @@ namespace DAB_AFL2.Models
 
         public int Attempt { get; set; }
 
-        //One-to-many with Course
+        //many to one with Course
+        [Required]
         public int CourseID { get; set; }
         public Course Course { get; set; }
 
-        //One-to-one with Group
-        public int GroupID { get; set; }
-        
-        // public Group Group { get; set; }
+        //one to many with group
+         public List<Group> Groups { get; set; }
 
     }
 }

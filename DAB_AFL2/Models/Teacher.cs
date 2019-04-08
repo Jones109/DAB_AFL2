@@ -9,14 +9,21 @@ namespace DAB_AFL2.Models
     public class Teacher
     {
         [Key]
-        public int StudentId { get; set; }
-        [MaxLength(Int16.MaxValue)]
-        public short Birthday { get; set; }
+        public int TeacherId { get; set; }
+
+        
+        public DateTime Birthday { get; set; }
+
+        [Required]
         [MaxLength(128)]
         public string Name { get; set; }
         
-        //Course Relation
+        //Many to many with course
         public List<Teacher_Courses> Teacher_Courses { get; set; }
+
+
+        //one to many with groups
+        public List<Group> Groups { get; set; }
 
     }
 }

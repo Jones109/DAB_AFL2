@@ -1,14 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 
 namespace DAB_AFL2.Models
 {
-    class Enrolled
+    public class Enrolled
     {
-        public int CourseId;
-        public int StudentId;
-        public string Status;
+        [Required]
+        public int CourseId { get; set; }
+
+        public Course Course { get; set; }
+
+        [Required]
+        public int StudentId { get; set; }
+        public Student Student { get; set; }
+
+        public string Status { get; set; }
     }
 }
