@@ -150,7 +150,7 @@ namespace DAB_AFL2.Data
         {
             //Seeds 3 Students in the DB
             modelBuilder.Entity<Student>().HasData(
-                new Student { StudentID = 1, Birthday = DateTime.Today,EnrollDate = DateTime.Today,GraduateDate = DateTime.Today, Name = "Student1"},
+                new Student { StudentID = 1, Birthday = DateTime.Today, EnrollDate = DateTime.Today,GraduateDate = DateTime.Today, Name = "Student1"},
                 new Student { StudentID = 2, Birthday = DateTime.Today, EnrollDate = DateTime.Today, GraduateDate = DateTime.Today, Name = "Student2" },
                 new Student { StudentID = 3, Birthday = DateTime.Today, EnrollDate = DateTime.Today, GraduateDate = DateTime.Today, Name = "Student3" }
             );
@@ -174,7 +174,7 @@ namespace DAB_AFL2.Data
             
             //Seeds 3 enrolled in the DB
             modelBuilder.Entity<Enrolled>().HasData(
-                new Enrolled { CourseId = 1,Status = "Active", StudentId = 1 },
+                new Enrolled { CourseId = 1, Status = "Active", StudentId = 1 },
                 new Enrolled { CourseId = 2, Status = "Active", StudentId = 2 },
                 new Enrolled { CourseId = 3, Status = "Active", StudentId = 3 }
             );

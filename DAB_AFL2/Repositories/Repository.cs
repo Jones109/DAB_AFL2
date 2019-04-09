@@ -43,8 +43,8 @@ namespace DAB_AFL2.Repositories
             {
                 using (var context = new BlackboardDbContext(_options))
                 {
-
-                    var courses = await context.Courses.ToListAsync();
+                    //dc.Students.Where(s => s.StudentCourseEnrollments.Any(e => e.Course.CourseID == courseID)
+                    var courses = await context.Courses.Where(e => e.Enrolled.Any(s => s.StudentId == studentId)).ToListAsync();
 
                     return courses;
                 }
@@ -53,6 +53,18 @@ namespace DAB_AFL2.Repositories
         }
 
         #endregion
+
+        public async Task<List<Teacher>> GetTeachers(int courseId)
+        {
+            using (var context = new BlackboardDbContext(_options))
+            {
+                
+                
+            
+            }
+            
+            return null;
+        }
 
 
 
