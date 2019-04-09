@@ -8,6 +8,9 @@
   <ItemGroup>
     <Compile Remove="Migrations\20190409121143_Test.cs" />
     <Compile Remove="Migrations\20190409125904_CalendarEvents.cs" />
+    <Compile Remove="Migrations\20190409140121_contentFoldersAndAreas.cs" />
+    <Compile Remove="Migrations\20190409141311_ContentArea.cs" />
+    <Compile Remove="Migrations\20190409145711_CourseContent1.cs" />
   </ItemGroup>
 
   <ItemGroup>

@@ -61,35 +61,31 @@ namespace DAB_AFL2.Data
 
         private void CourseContentOnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Course>()
-                .HasMany(c => c.Folders)
-                .WithOne(a => a.Course)
-                .HasForeignKey(a => a.Course_FK);
-
             modelBuilder.Entity<Folder>()
                 .HasOne(t => t.Area)
                 .WithOne(t => t.Folder)
                 .HasForeignKey<Area>();
 
-            modelBuilder.Entity<Area>()
-                .HasOne(t => t.Folder)
-                .WithOne(t => t.Area);
-
-            modelBuilder.Entity<Area>().HasData(
-                new Area { contentUri = "SupBro",folder_FK = "Folder1", mainArea = "MainDataWithBigFont", },
-                new Area { contentUri = "SupHo", folder_FK = "Folder1",  mainArea = "SubDataWithSmallerFont", parent = "MainDataWithBigFont" }
+            modelBuilder.Entity<Course>()
+                .HasMany(c => c.Folders)
+                .WithOne(a => a.Course)
+                .HasForeignKey(a => a.Course_FK);
+            
+            modelBuilder.Entity<Folder>().HasData(
+                new Folder { Course_FK = 1, Name = "Folder1", FolderId = 1 },
+                new Folder { Course_FK = 1, Name = "Folder2", FolderId = 2 },
+                new Folder { Course_FK = 1, Name = "Folder3", FolderId = 3 },
+                new Folder { Course_FK = 2, Name = "Folder4", FolderId = 4 },
+                new Folder { Course_FK = 2, Name = "Folder5", FolderId = 5 },
+                new Folder { Course_FK = 2, Name = "Folder6", FolderId = 6 },
+                new Folder { Course_FK = 3, Name = "Folder7", FolderId = 7 },
+                new Folder { Course_FK = 3, Name = "Folder8", FolderId = 8 },
+                new Folder { Course_FK = 3, Name = "Folder9", FolderId = 9 }
             );
 
-            modelBuilder.Entity<Folder>().HasData(
-                new Folder { Course_FK = 1, Name = "Folder1" },
-                new Folder { Course_FK = 1, Name = "Folder2" },
-                new Folder { Course_FK = 1, Name = "Folder3" },
-                new Folder { Course_FK = 2, Name = "Folder1" },
-                new Folder { Course_FK = 2, Name = "Folder2" },
-                new Folder { Course_FK = 2, Name = "Folder3" },
-                new Folder { Course_FK = 3, Name = "Folder1" },
-                new Folder { Course_FK = 3, Name = "Folder2" },
-                new Folder { Course_FK = 3, Name = "Folder3" }
+            modelBuilder.Entity<Area>().HasData(
+                new Area { ContentUri = "SupBro", MainArea = "MainDataWithBigFont", AreaId = 1},
+                new Area { ContentUri = "SupHo", MainArea = "SubDataWithSmallerFont", Parent = "MainDataWithBigFont",AreaId = 2}
             );
         }
 

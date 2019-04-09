@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAB_AFL2.Migrations
 {
     [DbContext(typeof(BlackboardDbContext))]
-    [Migration("20190409122900_courseContent")]
-    partial class courseContent
+    [Migration("20190409145905_CourseContent1")]
+    partial class CourseContent1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -58,6 +58,17 @@ namespace DAB_AFL2.Migrations
                         });
                 });
 
+            modelBuilder.Entity("DAB_AFL2.Models.Calendar", b =>
+                {
+                    b.Property<int>("CalendarId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.HasKey("CalendarId");
+
+                    b.ToTable("Calendars");
+                });
+
             modelBuilder.Entity("DAB_AFL2.Models.Course", b =>
                 {
                     b.Property<int>("CourseId")
@@ -86,6 +97,115 @@ namespace DAB_AFL2.Migrations
                         {
                             CourseId = 3,
                             CourseName = "Course3"
+                        });
+                });
+
+            modelBuilder.Entity("DAB_AFL2.Models.CourseContent.Area", b =>
+                {
+                    b.Property<int>("AreaId");
+
+                    b.Property<string>("ContentUri");
+
+                    b.Property<int>("FolderId_FK");
+
+                    b.Property<string>("MainArea");
+
+                    b.Property<string>("Parent");
+
+                    b.HasKey("AreaId");
+
+                    b.ToTable("Areas");
+
+                    b.HasData(
+                        new
+                        {
+                            AreaId = 1,
+                            ContentUri = "SupBro",
+                            FolderId_FK = 0,
+                            MainArea = "MainDataWithBigFont"
+                        },
+                        new
+                        {
+                            AreaId = 2,
+                            ContentUri = "SupHo",
+                            FolderId_FK = 0,
+                            MainArea = "SubDataWithSmallerFont",
+                            Parent = "MainDataWithBigFont"
+                        });
+                });
+
+            modelBuilder.Entity("DAB_AFL2.Models.CourseContent.Folder", b =>
+                {
+                    b.Property<int>("FolderId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Course_FK");
+
+                    b.Property<string>("Name");
+
+                    b.Property<string>("Parent");
+
+                    b.HasKey("FolderId");
+
+                    b.HasIndex("Course_FK");
+
+                    b.ToTable("Folders");
+
+                    b.HasData(
+                        new
+                        {
+                            FolderId = 1,
+                            Course_FK = 1,
+                            Name = "Folder1"
+                        },
+                        new
+                        {
+                            FolderId = 2,
+                            Course_FK = 1,
+                            Name = "Folder2"
+                        },
+                        new
+                        {
+                            FolderId = 3,
+                            Course_FK = 1,
+                            Name = "Folder3"
+                        },
+                        new
+                        {
+                            FolderId = 4,
+                            Course_FK = 2,
+                            Name = "Folder4"
+                        },
+                        new
+                        {
+                            FolderId = 5,
+                            Course_FK = 2,
+                            Name = "Folder5"
+                        },
+                        new
+                        {
+                            FolderId = 6,
+                            Course_FK = 2,
+                            Name = "Folder6"
+                        },
+                        new
+                        {
+                            FolderId = 7,
+                            Course_FK = 3,
+                            Name = "Folder7"
+                        },
+                        new
+                        {
+                            FolderId = 8,
+                            Course_FK = 3,
+                            Name = "Folder8"
+                        },
+                        new
+                        {
+                            FolderId = 9,
+                            Course_FK = 3,
+                            Name = "Folder9"
                         });
                 });
 
@@ -122,6 +242,28 @@ namespace DAB_AFL2.Migrations
                             StudentId = 3,
                             Status = "Active"
                         });
+                });
+
+            modelBuilder.Entity("DAB_AFL2.Models.Event", b =>
+                {
+                    b.Property<int>("EventId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CalendarId");
+
+                    b.Property<string>("Description")
+                        .IsRequired();
+
+                    b.Property<DateTime>("EndTime");
+
+                    b.Property<DateTime>("StarTime");
+
+                    b.HasKey("EventId");
+
+                    b.HasIndex("CalendarId");
+
+                    b.ToTable("Events");
                 });
 
             modelBuilder.Entity("DAB_AFL2.Models.Group", b =>
@@ -324,6 +466,22 @@ namespace DAB_AFL2.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
+            modelBuilder.Entity("DAB_AFL2.Models.CourseContent.Area", b =>
+                {
+                    b.HasOne("DAB_AFL2.Models.CourseContent.Folder", "Folder")
+                        .WithOne("Area")
+                        .HasForeignKey("DAB_AFL2.Models.CourseContent.Area", "AreaId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("DAB_AFL2.Models.CourseContent.Folder", b =>
+                {
+                    b.HasOne("DAB_AFL2.Models.Course", "Course")
+                        .WithMany("Folders")
+                        .HasForeignKey("Course_FK")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("DAB_AFL2.Models.Enrolled", b =>
                 {
                     b.HasOne("DAB_AFL2.Models.Course", "Course")
@@ -334,6 +492,14 @@ namespace DAB_AFL2.Migrations
                     b.HasOne("DAB_AFL2.Models.Student", "Student")
                         .WithMany("Enrolled")
                         .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("DAB_AFL2.Models.Event", b =>
+                {
+                    b.HasOne("DAB_AFL2.Models.Calendar", "Calendar")
+                        .WithMany("Events")
+                        .HasForeignKey("CalendarId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

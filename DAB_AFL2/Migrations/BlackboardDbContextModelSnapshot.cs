@@ -65,12 +65,6 @@ namespace DAB_AFL2.Migrations
                     b.HasKey("CalendarId");
 
                     b.ToTable("Calendars");
-
-                    b.HasData(
-                        new
-                        {
-                            CalendarId = 1
-                        });
                 });
 
             modelBuilder.Entity("DAB_AFL2.Models.Course", b =>
@@ -101,6 +95,115 @@ namespace DAB_AFL2.Migrations
                         {
                             CourseId = 3,
                             CourseName = "Course3"
+                        });
+                });
+
+            modelBuilder.Entity("DAB_AFL2.Models.CourseContent.Area", b =>
+                {
+                    b.Property<int>("AreaId");
+
+                    b.Property<string>("ContentUri");
+
+                    b.Property<int>("FolderId_FK");
+
+                    b.Property<string>("MainArea");
+
+                    b.Property<string>("Parent");
+
+                    b.HasKey("AreaId");
+
+                    b.ToTable("Areas");
+
+                    b.HasData(
+                        new
+                        {
+                            AreaId = 1,
+                            ContentUri = "SupBro",
+                            FolderId_FK = 0,
+                            MainArea = "MainDataWithBigFont"
+                        },
+                        new
+                        {
+                            AreaId = 2,
+                            ContentUri = "SupHo",
+                            FolderId_FK = 0,
+                            MainArea = "SubDataWithSmallerFont",
+                            Parent = "MainDataWithBigFont"
+                        });
+                });
+
+            modelBuilder.Entity("DAB_AFL2.Models.CourseContent.Folder", b =>
+                {
+                    b.Property<int>("FolderId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Course_FK");
+
+                    b.Property<string>("Name");
+
+                    b.Property<string>("Parent");
+
+                    b.HasKey("FolderId");
+
+                    b.HasIndex("Course_FK");
+
+                    b.ToTable("Folders");
+
+                    b.HasData(
+                        new
+                        {
+                            FolderId = 1,
+                            Course_FK = 1,
+                            Name = "Folder1"
+                        },
+                        new
+                        {
+                            FolderId = 2,
+                            Course_FK = 1,
+                            Name = "Folder2"
+                        },
+                        new
+                        {
+                            FolderId = 3,
+                            Course_FK = 1,
+                            Name = "Folder3"
+                        },
+                        new
+                        {
+                            FolderId = 4,
+                            Course_FK = 2,
+                            Name = "Folder4"
+                        },
+                        new
+                        {
+                            FolderId = 5,
+                            Course_FK = 2,
+                            Name = "Folder5"
+                        },
+                        new
+                        {
+                            FolderId = 6,
+                            Course_FK = 2,
+                            Name = "Folder6"
+                        },
+                        new
+                        {
+                            FolderId = 7,
+                            Course_FK = 3,
+                            Name = "Folder7"
+                        },
+                        new
+                        {
+                            FolderId = 8,
+                            Course_FK = 3,
+                            Name = "Folder8"
+                        },
+                        new
+                        {
+                            FolderId = 9,
+                            Course_FK = 3,
+                            Name = "Folder9"
                         });
                 });
 
@@ -358,6 +461,22 @@ namespace DAB_AFL2.Migrations
                     b.HasOne("DAB_AFL2.Models.Course", "Course")
                         .WithMany("Assignments")
                         .HasForeignKey("CourseID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("DAB_AFL2.Models.CourseContent.Area", b =>
+                {
+                    b.HasOne("DAB_AFL2.Models.CourseContent.Folder", "Folder")
+                        .WithOne("Area")
+                        .HasForeignKey("DAB_AFL2.Models.CourseContent.Area", "AreaId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("DAB_AFL2.Models.CourseContent.Folder", b =>
+                {
+                    b.HasOne("DAB_AFL2.Models.Course", "Course")
+                        .WithMany("Folders")
+                        .HasForeignKey("Course_FK")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
