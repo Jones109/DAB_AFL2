@@ -21,6 +21,6 @@ namespace DAB_AFL2.Models
 
         //one to many with group
          public List<Group> Groups { get; set; }
-
+      
     }
 }

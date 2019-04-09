@@ -4,14 +4,16 @@ using DAB_AFL2.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DAB_AFL2.Migrations
 {
     [DbContext(typeof(BlackboardDbContext))]
-    partial class BlackboardDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190409130328_CalendarEvent")]
+    partial class CalendarEvent
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -64,13 +66,7 @@ namespace DAB_AFL2.Migrations
 
                     b.HasKey("CalendarId");
 
-                    b.ToTable("Calendars");
-
-                    b.HasData(
-                        new
-                        {
-                            CalendarId = 1
-                        });
+                    b.ToTable("Calendar");
                 });
 
             modelBuilder.Entity("DAB_AFL2.Models.Course", b =>
@@ -158,7 +154,7 @@ namespace DAB_AFL2.Migrations
 
                     b.HasIndex("CalendarId");
 
-                    b.ToTable("Events");
+                    b.ToTable("Event");
                 });
 
             modelBuilder.Entity("DAB_AFL2.Models.Group", b =>
