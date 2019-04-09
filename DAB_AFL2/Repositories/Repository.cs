@@ -52,6 +52,18 @@ namespace DAB_AFL2.Repositories
             return null;
         }
 
+        public void InsertCourse(string CourseName)
+        {
+            using (var context = new BlackboardDbContext(_options))
+            {
+                Course course = new Course();
+                course.CourseName = CourseName;
+
+                context.Courses.Add(course);
+                context.SaveChanges();
+            }
+        }
+
         #endregion
 
 
@@ -71,6 +83,20 @@ namespace DAB_AFL2.Repositories
             return null;
         }
 
+        public void InsertStudent(string name,DateTime birthdate)
+        {
+            using (var context = new BlackboardDbContext(_options))
+            {
+                Student student = new Student();
+                student.Name = name;
+                student.Birthday = birthdate;
+                student.EnrollDate = DateTime.Now;
+                student.GraduateDate = DateTime.Now.AddYears(3);
+
+                context.Students.Add(student);
+                context.SaveChanges();
+            }
+        }
         #endregion
 
         private async Task<bool> IfAnyCourses()

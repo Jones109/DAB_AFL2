@@ -13,7 +13,7 @@ namespace DAB_AFL2
 
     class Program
     {
-        
+
         static void Main(string[] args)
         {
             Repository rep = new Repository();
@@ -45,7 +45,7 @@ namespace DAB_AFL2
                                 Console.WriteLine("Listing all students:");
                                 foreach (var student in rep.GetStudents().Result)
                                 {
-                                    Console.WriteLine($"StudentId: {student.StudentID} Name: {student.Name}" );
+                                    Console.WriteLine($"StudentId: {student.StudentID} Name: {student.Name}");
                                 }
                                 Console.WriteLine(".... PRESS ANY KEY TO CONTINUE");
                                 Console.ReadKey();
@@ -78,6 +78,7 @@ namespace DAB_AFL2
                                 Console.ReadKey();
                                 break;
                             case 5:
+
                                 Console.WriteLine("NOT WORKING YET");
                                 Console.WriteLine(".... PRESS ANY KEY TO CONTINUE");
                                 Console.ReadKey();
@@ -92,26 +93,83 @@ namespace DAB_AFL2
 
                         break;
                     case 2:
-                        
-                        Console.WriteLine("NOT WORKING YET");
-                        Console.WriteLine(".... PRESS ANY KEY TO CONTINUE");
-                        Console.ReadKey();
+                        //Insert start
+                        Console.WriteLine("Insert new student press 1");
+                        Console.WriteLine("Insert new course press 2");
+                        Console.WriteLine("Insert new event press 3");
+
+                        viewChoice = int.Parse(Console.ReadLine());
+                        switch (viewChoice)
+                        {
+                            case 1:
+                                //new student
+                                Console.WriteLine("Write the students name");
+                                string studentName = Console.ReadLine();
+                                Console.WriteLine("Write the students birthdate");
+                                string UserInput = Console.ReadLine();
+                                DateTime birthDate = CheckIfStringIsDate(UserInput);
+                                rep.InsertStudent(studentName, birthDate);
+                                Console.WriteLine("success, press any key to continue..");
+                                Console.ReadKey();
+                                break;
+                            case 2:
+                                //new course
+                                Console.WriteLine("Write the course name");
+                                string courseName = Console.ReadLine();
+                                rep.InsertCourse(courseName);
+                                Console.WriteLine("success, press any key to continue..");
+                                Console.ReadKey();
+                                break;
+                            case 3:
+                                //new event
+                                Console.WriteLine("Write the name of your event");
+                                string eventName = Console.ReadLine();
+                                Console.WriteLine("Write the date of your event");
+                                string eventDateSting = Console.ReadLine();
+                                DateTime eventDate = CheckIfStringIsDate(eventDateSting);
+                                Console.WriteLine("success, press any key to continue..");
+                                Console.ReadKey();
+                                break;
+                            default:
+                                break;
+
+                        }
                         break;
+                }
+
+
+
+
+
+
+
+                var courseList = rep.GetCourses().Result;
+                foreach (var course in courseList)
+                {
+                    Console.WriteLine(course.CourseName);
+                }
+
+            }
+        }
+        public static DateTime CheckIfStringIsDate(string userInput)
+        {
+            bool isDate = false;
+            string date = userInput;
+            DateTime birthDate = new DateTime();
+            while (isDate == false)
+            {
+                if (DateTime.TryParse(date, out birthDate))
+                {
+                    isDate = true;
+                }
+                else
+                {
+                    Console.WriteLine("Not a valid date, try again");
+                    date = Console.ReadLine();
                 }
             }
 
-            
-
-            
-
-
-
-            var courseList = rep.GetCourses().Result;
-            foreach (var course in courseList)
-            {
-                Console.WriteLine(course.CourseName);
-            }
-            
+            return birthDate;
         }
     }
 }
