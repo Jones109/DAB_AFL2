@@ -101,12 +101,6 @@ namespace DAB_AFL2
                 }
             }
 
-            
-
-            
-
-
-
             var courseList = rep.GetCourses().Result;
             foreach (var course in courseList)
             {
