@@ -3,6 +3,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using DAB_AFL2.Models;
+using DAB_AFL2.Models.CourseContent;
 
 namespace DAB_AFL2.Data
 {
@@ -18,6 +19,8 @@ namespace DAB_AFL2.Data
         public DbSet<GroupStudents> GroupStudents { get; set; }
 
         public Assignment Assignments { get; set; }
+        public DbSet<Area> Areas { get; set; }
+        public DbSet<Folder> Folders { get; set; }
 
 
         public BlackboardDbContext()
@@ -50,9 +53,44 @@ namespace DAB_AFL2.Data
             EnrolledOnModelCreating(modelBuilder);
             GroupStudentsOnModelCreating(modelBuilder);
             Teacher_CoursesOnModelCreating(modelBuilder);
+            CourseContentOnModelCreating(modelBuilder);
 
         }
 
+
+        private void CourseContentOnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Course>()
+                .HasMany(c => c.Folders)
+                .WithOne(a => a.Course)
+                .HasForeignKey(a => a.Course_FK);
+
+            modelBuilder.Entity<Folder>()
+                .HasOne(t => t.Area)
+                .WithOne(t => t.Folder)
+                .HasForeignKey<Area>();
+
+            modelBuilder.Entity<Area>()
+                .HasOne(t => t.Folder)
+                .WithOne(t => t.Area);
+
+            modelBuilder.Entity<Area>().HasData(
+                new Area { contentUri = "SupBro",folder_FK = "Folder1", mainArea = "MainDataWithBigFont", },
+                new Area { contentUri = "SupHo", folder_FK = "Folder1",  mainArea = "SubDataWithSmallerFont", parent = "MainDataWithBigFont" }
+            );
+
+            modelBuilder.Entity<Folder>().HasData(
+                new Folder { Course_FK = 1, Name = "Folder1" },
+                new Folder { Course_FK = 1, Name = "Folder2" },
+                new Folder { Course_FK = 1, Name = "Folder3" },
+                new Folder { Course_FK = 2, Name = "Folder1" },
+                new Folder { Course_FK = 2, Name = "Folder2" },
+                new Folder { Course_FK = 2, Name = "Folder3" },
+                new Folder { Course_FK = 3, Name = "Folder1" },
+                new Folder { Course_FK = 3, Name = "Folder2" },
+                new Folder { Course_FK = 3, Name = "Folder3" }
+            );
+        }
 
 
         private void TeacherOnModelCreating(ModelBuilder modelBuilder)

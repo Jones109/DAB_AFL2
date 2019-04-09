@@ -12,7 +12,11 @@ namespace DAB_AFL2.Models.CourseContent
         public string Name { get; set; }
 
         public string Parent { get; set; }
+        public Area Area { get; set; }
 
+        [Required]
         public int Course_FK { get; set; }
+
+        public Course Course { get; set; }
     }
 }
