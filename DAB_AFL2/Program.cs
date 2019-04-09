@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using DAB_AFL2.Data;
 using DAB_AFL2.Models;
 using DAB_AFL2.Repositories;
 using Microsoft.EntityFrameworkCore.Query.ExpressionVisitors.Internal;
@@ -17,6 +18,7 @@ namespace DAB_AFL2
         static void Main(string[] args)
         {
             Repository rep = new Repository();
+
             while (true)
             {
                 Console.Clear();
@@ -67,7 +69,6 @@ namespace DAB_AFL2
                                 {
                                     Console.WriteLine($"CourseId: {course.CourseId} Course name: {course.CourseName}");
                                 }
-                                Console.WriteLine("NOT WORKING YET");
                                 Console.WriteLine(".... PRESS ANY KEY TO CONTINUE");
                                 Console.ReadKey();
 
