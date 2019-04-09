@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
@@ -15,7 +16,9 @@ namespace DAB_AFL2.Data
         public DbSet<Student> Students { get; set; }
         public DbSet<Enrolled> Enrolled  { get; set; }
         public DbSet<Group> Groups { get; set; }
-
+        public DbSet<Calendar> Calendars { get; set; }
+        public DbSet<Event> Events { get; set; }
+            
         public DbSet<GroupStudents> GroupStudents { get; set; }
 
         public Assignment Assignments { get; set; }
@@ -38,8 +41,6 @@ namespace DAB_AFL2.Data
                 optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=BlackboardDB;Trusted_Connection=true;MultipleActiveResultSets=true");
 
             }
-
-
         }
 
 
@@ -95,13 +96,11 @@ namespace DAB_AFL2.Data
 
         private void TeacherOnModelCreating(ModelBuilder modelBuilder)
         {
-
             //Make the one to many relationship to groups
             modelBuilder.Entity<Teacher>()
                 .HasMany(t => t.Groups)
                 .WithOne(g => g.Teacher)
                 .HasForeignKey(g => g.TeacherId);
-
             
             //Seeds 3 teachers in the DB
             modelBuilder.Entity<Teacher>().HasData(
@@ -109,20 +108,15 @@ namespace DAB_AFL2.Data
                 new Teacher { TeacherId = 2, Name = "Teacher2" },
                 new Teacher { TeacherId = 3, Name = "Teacher3" }
             );
-            
-
         }
 
         private void CourseOnModelCreating(ModelBuilder modelBuilder)
         {
-
-
             //Make the one to many relationship to Assignments
             modelBuilder.Entity<Course>()
                 .HasMany(c => c.Assignments)
                 .WithOne(a => a.Course)
                 .HasForeignKey(a => a.CourseID);
-
             
             //Seeds 3 teachers in the DB
             modelBuilder.Entity<Course>().HasData(
@@ -130,15 +124,12 @@ namespace DAB_AFL2.Data
                 new Course { CourseId = 2, CourseName = "Course2" },
                 new Course { CourseId = 3, CourseName = "Course3" }
             );
-            
-
         }
 
         private void Teacher_CoursesOnModelCreating(ModelBuilder modelBuilder)
         {
             //Sets up the primary key for Teacher_courses
             modelBuilder.Entity<Teacher_Courses>().HasKey(eg => new { eg.TeacherID, eg.CourseID });
-
 
             //Make the many to many relationship between courses and teachers
             modelBuilder.Entity<Teacher_Courses>()
@@ -150,7 +141,6 @@ namespace DAB_AFL2.Data
                 .HasOne<Course>(sc => sc.Course)
                 .WithMany(s => s.Teacher_Courses)
                 .HasForeignKey(sc => sc.CourseID);
-
             
             //Seeds 3 Teacher_courses in the DB
             modelBuilder.Entity<Teacher_Courses>().HasData(
@@ -158,26 +148,22 @@ namespace DAB_AFL2.Data
                 new Teacher_Courses { TeacherID = 2, CourseID = 2 },
                 new Teacher_Courses { TeacherID = 3, CourseID = 3 }
             );
-            
         }
 
         private void StudentOnModelCreating(ModelBuilder modelBuilder)
         {
-            
             //Seeds 3 Students in the DB
             modelBuilder.Entity<Student>().HasData(
                 new Student { StudentID = 1, Birthday = DateTime.Today,EnrollDate = DateTime.Today,GraduateDate = DateTime.Today, Name = "Student1"},
                 new Student { StudentID = 2, Birthday = DateTime.Today, EnrollDate = DateTime.Today, GraduateDate = DateTime.Today, Name = "Student2" },
                 new Student { StudentID = 3, Birthday = DateTime.Today, EnrollDate = DateTime.Today, GraduateDate = DateTime.Today, Name = "Student3" }
             );
-            
         }
 
         private void EnrolledOnModelCreating(ModelBuilder modelBuilder)
         {
             //Sets up the primary key for Enrolled
             modelBuilder.Entity<Enrolled>().HasKey(eg => new { eg.CourseId, eg.StudentId });
-
 
             //Make the many to many relationship between courses and Students
             modelBuilder.Entity<Enrolled>()
@@ -189,7 +175,6 @@ namespace DAB_AFL2.Data
                 .HasOne<Course>(sc => sc.Course)
                 .WithMany(s => s.Enrolled)
                 .HasForeignKey(sc => sc.CourseId);
-
             
             //Seeds 3 enrolled in the DB
             modelBuilder.Entity<Enrolled>().HasData(
@@ -212,11 +197,30 @@ namespace DAB_AFL2.Data
             
         }
 
+        private void CalendarOnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Calendar>()
+                .HasMany(c => c.Events)
+                .WithOne(a => a.Calendar)
+                .HasForeignKey(a => a.CalendarId);
+
+            modelBuilder.Entity<Calendar>().HasData(
+                new Calendar { CalendarId = 1 }
+            );
+        }
+
+        private void EventOnModelCreating(ModelBuilder modelBuilder)
+        {
+           modelBuilder.Entity<Event>()
+                .HasOne(c => c.Calendar)
+                .WithMany(a => a.Events)
+                .HasForeignKey(a => a.EventId);
+        }
+
         private void GroupStudentsOnModelCreating(ModelBuilder modelBuilder)
         {
             //Sets up the primary key for GroupStudents
             modelBuilder.Entity<GroupStudents>().HasKey(eg => new { eg.GroupId, eg.StudentId });
-
 
             //Make the many to many relationship between groups and students
             modelBuilder.Entity<GroupStudents>()
@@ -240,15 +244,11 @@ namespace DAB_AFL2.Data
 
         private void AssignmentOnModelCreating(ModelBuilder modelBuilder)
         {
-            
-
             //Make the one to many relationship to Groups
             modelBuilder.Entity<Assignment>()
                 .HasMany(a => a.Groups)
                 .WithOne(g => g.Assignment)
                 .HasForeignKey(g => g.AssignmentID);
-
-
             
             //Seeds 3 Assignments in the DB
             modelBuilder.Entity<Assignment>().HasData(
@@ -256,7 +256,7 @@ namespace DAB_AFL2.Data
                 new Assignment { AssignmentID = 2, CourseID = 2 },
                 new Assignment { AssignmentID = 3, CourseID = 3 }
             );
-            
+
         }
 
     }
