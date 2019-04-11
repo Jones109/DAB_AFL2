@@ -35,6 +35,8 @@ namespace DAB_AFL2
                         Console.WriteLine("List all Students and Teachers for specific Course: Enter '4'");
                         Console.WriteLine("List Content for specific course: Enter '5'");
                         Console.WriteLine("List all events from calendar: Enter '6'");
+                        Console.WriteLine("List students assignment, with grade and who grade these: Enter 7");
+                        
 
                         Console.WriteLine("Go back: Enter '0'");
                         int viewChoice = int.Parse(Console.ReadLine());
@@ -104,8 +106,15 @@ namespace DAB_AFL2
                                 Console.WriteLine("Press any key to continue..");
                                 Console.ReadKey();
                                 break;
-                            case 0:
 
+                            case 7:
+                                Console.WriteLine("Enter studentID");
+                                var studentID = Console.ReadLine();
+                                Console.WriteLine("Enter CourseID");
+                                var courseID = Console.ReadLine();
+                                break;
+
+                            case 0:
                                 break;
                         }
 

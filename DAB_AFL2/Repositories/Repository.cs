@@ -37,14 +37,15 @@ namespace DAB_AFL2.Repositories
         }
 
 
+       
+
         public async Task<List<Course>> GetCourses(int studentId)
         {
             if (IfAnyCourses().Result)
             {
                 using (var context = new BlackboardDbContext(_options))
                 {
-
-                    var courses = await context.Courses.ToListAsync();
+                    var courses = await context.Courses.Where(e => e.Enrolled.Any(s => s.StudentId == studentId)).ToListAsync();
 
                     return courses;
                 }
@@ -82,6 +83,21 @@ namespace DAB_AFL2.Repositories
             }
             return null;
         }
+
+        /*
+        public async void GetAssignments(int studentID, int courseID)
+        {
+            using (var context = new BlackboardDbContext(_options))
+            {
+                //var assignments = await context.Assignments
+                    //Courses.Where(e => e.Enrolled.Where()).ToListAsync();
+
+
+
+                //return courses;
+            }
+        }
+        */
 
         public void InsertStudent(string name, DateTime birthdate)
         {
@@ -169,6 +185,6 @@ namespace DAB_AFL2.Repositories
             }
         }
 
-
+        
     }
 }
