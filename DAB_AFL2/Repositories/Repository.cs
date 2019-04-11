@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DAB_AFL2.Data;
 using DAB_AFL2.Models;
+using DAB_AFL2.Models.CourseContent;
 using Microsoft.EntityFrameworkCore;
 using Remotion.Linq.Parsing.Structure.IntermediateModel;
 
@@ -49,6 +50,23 @@ namespace DAB_AFL2.Repositories
                     return courses;
                 }
             }
+            return null;
+        }
+
+
+
+        public async Task<List<Folder>> GetFolders(int folderId)
+        {
+            if (IfAnyFolders().Result)
+            {
+                using (var context = new BlackboardDbContext(_options))
+                {
+                    var folders = await context.Folders.Where(f => f.FolderId == folderId).ToListAsync();
+
+                    return folders;
+                }
+            }
+
             return null;
         }
 
@@ -119,6 +137,14 @@ namespace DAB_AFL2.Repositories
             }
         }
 
-        
+         private async Task<bool> IfAnyFolders()
+         {
+             using (var context = new BlackboardDbContext(_options))
+             {
+                 bool result = await context.Folders.AnyAsync();
+                 return result;
+             }
+         }
+
     }
 }

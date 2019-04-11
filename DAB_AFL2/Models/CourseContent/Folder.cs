@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
 
@@ -13,11 +14,12 @@ namespace DAB_AFL2.Models.CourseContent
 
         public string Name { get; set; }
 
-        public string Parent { get; set; }
+        public int Parent { get; set; }
 
         public Area Area { get; set; }
 
         [Required]
+        [ForeignKey("Course")]
         public int Course_FK { get; set; }
 
         public Course Course { get; set; }

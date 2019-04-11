@@ -70,7 +70,11 @@ namespace DAB_AFL2.Data
                 .HasMany(c => c.Folders)
                 .WithOne(a => a.Course)
                 .HasForeignKey(a => a.Course_FK);
-            
+
+            modelBuilder.Entity<Folder>()
+                .Property(a => a.FolderId)
+                .ValueGeneratedOnAdd();
+
             modelBuilder.Entity<Folder>().HasData(
                 new Folder { Course_FK = 1, Name = "Folder1", FolderId = 1 },
                 new Folder { Course_FK = 1, Name = "Folder2", FolderId = 2 },
@@ -80,12 +84,13 @@ namespace DAB_AFL2.Data
                 new Folder { Course_FK = 2, Name = "Folder6", FolderId = 6 },
                 new Folder { Course_FK = 3, Name = "Folder7", FolderId = 7 },
                 new Folder { Course_FK = 3, Name = "Folder8", FolderId = 8 },
-                new Folder { Course_FK = 3, Name = "Folder9", FolderId = 9 }
+                new Folder { Course_FK = 3, Name = "Folder9", FolderId = 9 },
+                new Folder { Course_FK = 1, Name = "Folder10", FolderId = 10,Parent = 1}
             );
 
             modelBuilder.Entity<Area>().HasData(
-                new Area { ContentUri = "SupBro", MainArea = "MainDataWithBigFont", AreaId = 1},
-                new Area { ContentUri = "SupHo", MainArea = "SubDataWithSmallerFont", Parent = "MainDataWithBigFont",AreaId = 2}
+                new Area { ContentUri = "SupBro", MainArea = "THIS IS A MAIN AREA", AreaId = 1, FolderId_FK = 1},
+                new Area { ContentUri = "SupHo", Parent = "Sub area to main area", AreaId = 2}
             );
         }
 
