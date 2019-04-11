@@ -146,7 +146,7 @@ namespace DAB_AFL2
                                 {
                                     foreach (var eventDate in cal.Events)
                                     {
-                                        Console.WriteLine("Start: " + eventDate.StarTime);
+                                        Console.WriteLine("Start: " + eventDate.StartTime);
                                         Console.WriteLine("End: " + eventDate.EndTime);
                                         Console.WriteLine("Description : \n" + eventDate.Description + "\n\n");
                                     }

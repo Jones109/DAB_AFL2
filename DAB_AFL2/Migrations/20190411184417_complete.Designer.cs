@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAB_AFL2.Migrations
 {
     [DbContext(typeof(BlackboardDbContext))]
-    [Migration("20190411181253_1")]
-    partial class _1
+    [Migration("20190411184417_complete")]
+    partial class complete
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -177,6 +177,90 @@ namespace DAB_AFL2.Migrations
                             ContentUri = "Content1",
                             FolderId = 1,
                             Name = "Area1"
+                        },
+                        new
+                        {
+                            AreaId = 2,
+                            ContentUri = "Content2",
+                            FolderId = 2,
+                            Name = "Area2"
+                        },
+                        new
+                        {
+                            AreaId = 3,
+                            ContentUri = "Content3",
+                            FolderId = 3,
+                            Name = "Area3"
+                        },
+                        new
+                        {
+                            AreaId = 4,
+                            ContentUri = "Content4",
+                            FolderId = 4,
+                            Name = "Area4"
+                        },
+                        new
+                        {
+                            AreaId = 5,
+                            ContentUri = "Content5",
+                            FolderId = 5,
+                            Name = "Area5"
+                        },
+                        new
+                        {
+                            AreaId = 6,
+                            ContentUri = "Content6",
+                            FolderId = 10,
+                            Name = "Area6"
+                        },
+                        new
+                        {
+                            AreaId = 7,
+                            ContentUri = "Content7",
+                            FolderId = 10,
+                            Name = "Area7"
+                        },
+                        new
+                        {
+                            AreaId = 8,
+                            ContentUri = "Content8",
+                            FolderId = 1,
+                            Name = "Area8"
+                        },
+                        new
+                        {
+                            AreaId = 9,
+                            ContentUri = "Content9",
+                            FolderId = 1,
+                            Name = "Area9"
+                        },
+                        new
+                        {
+                            AreaId = 10,
+                            ContentUri = "Content10",
+                            FolderId = 2,
+                            Name = "Area10"
+                        },
+                        new
+                        {
+                            AreaId = 11,
+                            ContentUri = "Content11",
+                            FolderId = 3,
+                            Name = "Area11"
+                        },
+                        new
+                        {
+                            AreaId = 12,
+                            ContentUri = "Content12",
+                            FolderId = 4,
+                            Name = "Area12"
+                        },
+                        new
+                        {
+                            AreaId = 13,
+                            ContentUri = "Content13",
+                            FolderId = 5,
+                            Name = "Area13"
                         });
                 });
 
@@ -443,7 +527,7 @@ namespace DAB_AFL2.Migrations
 
                     b.Property<DateTime>("EndTime");
 
-                    b.Property<DateTime>("StarTime");
+                    b.Property<DateTime>("StartTime");
 
                     b.HasKey("EventId");
 

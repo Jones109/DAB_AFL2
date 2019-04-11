@@ -250,7 +250,7 @@ namespace DAB_AFL2.Repositories
                     even.Calendar = calendar;
                     even.Description = Description;
                     even.EndTime = end;
-                    even.StarTime = start;
+                    even.StartTime = start;
 
                     calendar.Events.Add(even);
 

@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DAB_AFL2.Migrations
 {
-    public partial class _1 : Migration
+    public partial class complete : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -70,7 +70,7 @@ namespace DAB_AFL2.Migrations
                 {
                     EventId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    StarTime = table.Column<DateTime>(nullable: false),
+                    StartTime = table.Column<DateTime>(nullable: false),
                     EndTime = table.Column<DateTime>(nullable: false),
                     Description = table.Column<string>(nullable: false),
                     CalendarId = table.Column<int>(nullable: false)
@@ -389,7 +389,20 @@ namespace DAB_AFL2.Migrations
             migrationBuilder.InsertData(
                 table: "Areas",
                 columns: new[] { "AreaId", "ContentUri", "FolderId", "Name" },
-                values: new object[] { 1, "Content1", 1, "Area1" });
+                values: new object[,]
+                {
+                    { 4, "Content4", 4, "Area4" },
+                    { 13, "Content13", 5, "Area13" },
+                    { 5, "Content5", 5, "Area5" },
+                    { 12, "Content12", 4, "Area12" },
+                    { 11, "Content11", 3, "Area11" },
+                    { 10, "Content10", 2, "Area10" },
+                    { 2, "Content2", 2, "Area2" },
+                    { 3, "Content3", 3, "Area3" },
+                    { 9, "Content9", 1, "Area9" },
+                    { 8, "Content8", 1, "Area8" },
+                    { 1, "Content1", 1, "Area1" }
+                });
 
             migrationBuilder.InsertData(
                 table: "Folders",
@@ -401,24 +414,33 @@ namespace DAB_AFL2.Migrations
                 columns: new[] { "GroupId", "AssignmentID", "Grade", "GroupSize", "TeacherId" },
                 values: new object[,]
                 {
-                    { 1, 1, 0, 4, 1 },
-                    { 6, 6, 0, 2, 6 },
-                    { 17, 5, 12, 3, 3 },
+                    { 4, 4, 0, 4, 4 },
                     { 11, 5, 4, 3, 5 },
                     { 5, 5, 7, 3, 5 },
                     { 16, 4, 0, 4, 2 },
                     { 10, 4, 0, 4, 4 },
-                    { 4, 4, 0, 4, 4 },
-                    { 9, 3, 7, 2, 3 },
-                    { 12, 6, 0, 2, 6 },
+                    { 17, 5, 12, 3, 3 },
+                    { 6, 6, 0, 2, 6 },
+                    { 15, 3, 10, 2, 1 },
+                    { 1, 1, 0, 4, 1 },
                     { 3, 3, 4, 2, 3 },
+                    { 12, 6, 0, 2, 6 },
                     { 14, 2, 0, 3, 8 },
                     { 8, 2, 0, 3, 2 },
                     { 2, 2, 7, 3, 2 },
                     { 13, 1, 4, 4, 7 },
                     { 7, 1, 4, 4, 1 },
-                    { 15, 3, 10, 2, 1 },
+                    { 9, 3, 7, 2, 3 },
                     { 18, 6, 0, 2, 4 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Areas",
+                columns: new[] { "AreaId", "ContentUri", "FolderId", "Name" },
+                values: new object[,]
+                {
+                    { 6, "Content6", 10, "Area6" },
+                    { 7, "Content7", 10, "Area7" }
                 });
 
             migrationBuilder.InsertData(
@@ -434,15 +456,15 @@ namespace DAB_AFL2.Migrations
                     { 9, 15 },
                     { 3, 9 },
                     { 3, 8 },
-                    { 3, 7 },
                     { 8, 14 },
+                    { 6, 12 },
                     { 2, 6 },
                     { 2, 5 },
                     { 2, 4 },
                     { 7, 13 },
                     { 1, 3 },
                     { 1, 2 },
-                    { 6, 12 },
+                    { 3, 7 },
                     { 12, 2 }
                 });
 

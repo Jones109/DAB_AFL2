@@ -525,7 +525,7 @@ namespace DAB_AFL2.Migrations
 
                     b.Property<DateTime>("EndTime");
 
-                    b.Property<DateTime>("StarTime");
+                    b.Property<DateTime>("StartTime");
 
                     b.HasKey("EventId");
 
