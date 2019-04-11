@@ -93,10 +93,56 @@ namespace DAB_AFL2
 
                         break;
                     case 2:
-                        
-                        Console.WriteLine("NOT WORKING YET");
-                        Console.WriteLine(".... PRESS ANY KEY TO CONTINUE");
-                        Console.ReadKey();
+                        Console.WriteLine("Your choices are:");
+                        Console.WriteLine("Add student: Enter '1'");
+                        Console.WriteLine("Add Course: Enter '2'");
+                        Console.WriteLine("Enroll Student in Course: Enter '3'");
+                        Console.WriteLine("Add Assignment: Enter '4'");
+                        Console.WriteLine("Grade Assignment: Enter '5'");
+                        Console.WriteLine("");
+
+                        Console.WriteLine("Go back: Enter '0'");
+                        int creationChoice = int.Parse(Console.ReadLine());
+
+                        switch (creationChoice)
+                        {
+                            case 1:
+                                
+                                Console.WriteLine("Enter StudentId");
+                                int studentId = int.Parse(Console.ReadLine());
+                                Console.WriteLine("Enter Name of the student");
+
+                                Console.WriteLine(".... PRESS ANY KEY TO CONTINUE");
+                                Console.ReadKey();
+                                break;
+                            case 2:
+                                Console.WriteLine("NOT WORKING YET");
+                                Console.WriteLine(".... PRESS ANY KEY TO CONTINUE");
+                                Console.ReadKey();
+                                break;
+                            case 3:
+                                Console.WriteLine("NOT WORKING YET");
+                                Console.WriteLine(".... PRESS ANY KEY TO CONTINUE");
+                                Console.ReadKey();
+                                break;
+                            case 4:
+                                Console.WriteLine("NOT WORKING YET");
+                                Console.WriteLine(".... PRESS ANY KEY TO CONTINUE");
+                                Console.ReadKey();
+                                break;
+                            case 5:
+                                Console.WriteLine("NOT WORKING YET");
+                                Console.WriteLine(".... PRESS ANY KEY TO CONTINUE");
+                                Console.ReadKey();
+                                break;
+                            case 0:
+
+                                break;
+
+                        }
+
+
+                      
                         break;
                 }
             }

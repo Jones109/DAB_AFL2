@@ -83,6 +83,22 @@ namespace DAB_AFL2.Repositories
             return null;
         }
 
+        public void AddStudent(int studentId, string name, DateTime birthday, DateTime enrollDate, DateTime graduateDate){
+        
+            using (var context = new BlackboardDbContext(_options))
+            {
+
+                context.Students.Add(new Student
+                {
+                    StudentID = studentId,
+                    Name = name,
+                    Birthday = birthday,
+                    EnrollDate = enrollDate, 
+                    GraduateDate = graduateDate
+                });
+            }
+        }
+
         #endregion
 
         private async Task<bool> IfAnyCourses()
