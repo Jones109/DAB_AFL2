@@ -137,6 +137,7 @@ namespace DAB_AFL2
                                 Console.WriteLine($"Listing all assignments for Student {studentID} in course {courseID}");
                                 foreach (var group in rep.GetAssignments(studentID, courseID).Result.FindAll(g => g.Assignment.CourseID == courseID))
                                 {
+                                    if (group.Assignment.Description != null)
                                     Console.WriteLine($"Assignment Description: {group.Assignment.Description}");
                                     Console.WriteLine($"Assignment grade: {group.Grade}");
                                     Console.WriteLine($"Graded by: {group.Teacher.Name}");
