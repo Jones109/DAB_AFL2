@@ -35,7 +35,19 @@ namespace DAB_AFL2.Repositories
             }
             return null;
         }
+        public async Task<Course> GetCourseStudentsAndTeachers(int id)
+        {
+            using (var context = new BlackboardDbContext(_options))
+            {
+               
+                var course = await context.Courses.Where(c => c.CourseId == id).Include(c=> c.Teacher_Courses).ThenInclude(t=> t.Teacher)
+                    .Include(c=> c.Enrolled).ThenInclude(e => e.Student).FirstAsync();
 
+                return course;
+            }
+            
+
+        }
 
         public async Task<List<Course>> GetCourses(int studentId)
         {
@@ -66,6 +78,7 @@ namespace DAB_AFL2.Repositories
 
         #endregion
 
+        
 
 
         #region Students
