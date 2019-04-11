@@ -111,7 +111,7 @@ namespace DAB_AFL2
                                 Console.WriteLine("Listing all events");
                                 Calendar cal = rep.GetCalendar().Result;
 
-                                if (cal.Events != null)
+                                if (cal.Events != null && cal.Events.Count > 0)
                                 {
                                     foreach (var eventDate in cal.Events)
                                     {

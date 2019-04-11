@@ -200,14 +200,18 @@ namespace DAB_AFL2.Data
 
         private void CalendarOnModelCreating(ModelBuilder modelBuilder)
         {
+
+            BlackboardDbContext b = new BlackboardDbContext();
+            b.Database.ExecuteSqlCommand("SET IDENTITY_INSERT dbo.Calendar ON");
             modelBuilder.Entity<Calendar>()
                 .HasMany(c => c.Events)
                 .WithOne(a => a.Calendar)
                 .HasForeignKey(a => a.CalendarId);
 
             modelBuilder.Entity<Calendar>().HasData(
-                new Calendar { CalendarId = 1 }
+                new Calendar()
             );
+
         }
 
         private void EventOnModelCreating(ModelBuilder modelBuilder)
