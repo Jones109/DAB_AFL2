@@ -21,7 +21,7 @@ namespace DAB_AFL2.Data
             
         public DbSet<GroupStudents> GroupStudents { get; set; }
 
-        public Assignment Assignments { get; set; }
+        public DbSet<Assignment> Assignments { get; set; }
         public DbSet<Area> Areas { get; set; }
         public DbSet<Folder> Folders { get; set; }
 
