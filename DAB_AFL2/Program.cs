@@ -35,7 +35,8 @@ namespace DAB_AFL2
                         Console.WriteLine("List all Students and Teachers for specific Course: Enter '4'");
                         Console.WriteLine("List Content for specific course: Enter '5'");
                         Console.WriteLine("List all events from calendar: Enter '6'");
-                        Console.WriteLine("Go back, press '0'");
+                        Console.WriteLine("List students assignment, with grade and who grade these: Enter 7");
+                        
 
                         Console.WriteLine("Go back: Enter '0'");
                         int viewChoice = int.Parse(Console.ReadLine());
@@ -53,9 +54,9 @@ namespace DAB_AFL2
                                 break;
                             case 2:
                                 Console.WriteLine("Listing all courses:");
-                                foreach (var course in rep.GetCourses().Result)
+                                foreach (var SpecificCourse in rep.GetCourses().Result)
                                 {
-                                    Console.WriteLine($"CourseId: {course.CourseId} Course name: {course.CourseName}");
+                                    Console.WriteLine($"CourseId: {SpecificCourse.CourseId} Course name: {SpecificCourse.CourseName}");
                                 }
                                 Console.WriteLine(".... PRESS ANY KEY TO CONTINUE");
                                 Console.ReadKey();
@@ -64,9 +65,9 @@ namespace DAB_AFL2
                                 Console.WriteLine("Enter StudentId to view courses:");
                                 int studentId = int.Parse(Console.ReadLine());
                                 Console.WriteLine($"Student with id: {studentId} is enrolled in the following courses:");
-                                foreach (var course in rep.GetCourses(studentId).Result)
+                                foreach (var SpecificCourse in rep.GetCourses(studentId).Result)
                                 {
-                                    Console.WriteLine($"CourseId: {course.CourseId} Course name: {course.CourseName}");
+                                    Console.WriteLine($"CourseId: {SpecificCourse.CourseId} Course name: {SpecificCourse.CourseName}");
                                 }
                                 Console.WriteLine("NOT WORKING YET");
                                 Console.WriteLine(".... PRESS ANY KEY TO CONTINUE");
@@ -74,7 +75,29 @@ namespace DAB_AFL2
 
                                 break;
                             case 4:
-                                Console.WriteLine("NOT WORKING YET");
+                                Console.WriteLine("enter course id");
+                                int courseId = int.Parse(Console.ReadLine());
+                                Course course = rep.GetCourseStudentsAndTeachers(courseId).Result;
+                                if (course == null)
+                                {
+                                    Console.WriteLine("this course does not exist");
+                                }
+                                else
+                                {
+
+                                    Console.WriteLine("List of teachers:");
+                                    foreach (Teacher_Courses teacher_Courses in course.Teacher_Courses)
+                                    {
+                                        Console.WriteLine(teacher_Courses.Teacher.Name);
+                                    }
+
+                                    Console.WriteLine("List of students:");
+                                    foreach(Enrolled enrolled in course.Enrolled)
+                                    {
+                                        Console.WriteLine(enrolled.Student.Name);
+                                    }
+                                }
+
                                 Console.WriteLine(".... PRESS ANY KEY TO CONTINUE");
                                 Console.ReadKey();
                                 break;
@@ -100,14 +123,12 @@ namespace DAB_AFL2
                                 }
                                 else
                                 {
-                                    Console.WriteLine("The calender is empty.. No events for now");;
+                                    Console.WriteLine("The calender is empty.. No events for now"); ;
                                 }
                                 Console.WriteLine("Press any key to continue..");
                                 Console.ReadKey();
                                 break;
-                            
                             case 0:
-
                                 break;
                         }
 
