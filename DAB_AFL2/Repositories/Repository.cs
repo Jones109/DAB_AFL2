@@ -142,6 +142,32 @@ namespace DAB_AFL2.Repositories
         }
         #endregion
 
+
+        #region Assignment
+
+        public async void AddAssignment(string description)
+        {
+            using (var context = new BlackboardDbContext(_options))
+            {
+                Assignment newAssignment = new Assignment
+                {
+
+                    CourseID = 1,
+                    Description = description
+
+                };
+
+
+                await context.Assignments.AddAsync(newAssignment);
+                await context.SaveChangesAsync();
+            }
+
+
+        }
+
+        #endregion
+
+       
         private async Task<bool> IfAnyCourses()
         {
             using (var context = new BlackboardDbContext(_options))
@@ -168,6 +194,8 @@ namespace DAB_AFL2.Repositories
                 return result;
             }
         }
+
+        
 
 
     }

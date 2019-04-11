@@ -118,6 +118,7 @@ namespace DAB_AFL2
                         Console.WriteLine("Insert new student press 1");
                         Console.WriteLine("Insert new course press 2");
                         Console.WriteLine("Insert new event press 3");
+                        Console.WriteLine("Inser new Assignment press 4");
 
                         viewChoice = int.Parse(Console.ReadLine());
                         switch (viewChoice)
@@ -158,6 +159,14 @@ namespace DAB_AFL2
                                 Console.WriteLine("success, press any key to continue..");
                                 Console.ReadKey();
                                 break;
+                            case 4:
+                                Console.WriteLine("Write the description of the Assignment");
+                                string description = Console.ReadLine();
+                                rep.AddAssignment(description);
+                                Console.WriteLine("success, press any key to continue..");
+                                Console.ReadKey();
+                                break;
+
                             default:
                                 break;
 
