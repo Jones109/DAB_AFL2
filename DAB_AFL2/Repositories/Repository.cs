@@ -174,29 +174,11 @@ namespace DAB_AFL2.Repositories
             {
                 //All the groups that the student is in
                 var groups = await context.Groups.Where(gs => gs.GroupStudents.Any(s => s.StudentId == studentID))
+                    .Include(g => g.Teacher)
                     .Include(g =>g.Assignment).ThenInclude(c=>c.Course).ToListAsync();
 
                 return groups;
-                foreach (var group in groups.FindAll(g=> g.Assignment.CourseID == courseID))
-                {
-                     Console.WriteLine(group.Assignment.Description);
-                }
-                /*
 
-                courses = courses.Where(c => c.CourseId == courseID).ToList(); //the wanted course
-
-
-                var assignments = courses.Where(a => a.Assignments.Any(b => b.CourseID == courseID)).ToList();
-
-                Console.WriteLine($"Student {studentID} is enrolled in course {courseID} with Assignments:"
-                foreach (var assignment in courses)
-                {
-                    foreach (var VARIABLE in assignment.Assignments)
-                    {
-                        Console.WriteLine(VARIABLE.AssignmentID);
-                    }
-                }
-                */
             }
         }
         
