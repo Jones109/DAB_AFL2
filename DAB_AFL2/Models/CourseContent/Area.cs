@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace DAB_AFL2.Models.CourseContent
@@ -16,8 +17,8 @@ namespace DAB_AFL2.Models.CourseContent
 
         public string Parent { get; set; }
 
-        public Folder Folder { get; set; }
-
+        [ForeignKey("Folder")]
         public int FolderId_FK { get; set; }
+        public Folder Folder { get; set; }
     }
 }
