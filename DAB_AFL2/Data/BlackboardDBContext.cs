@@ -107,7 +107,12 @@ namespace DAB_AFL2.Data
             modelBuilder.Entity<Teacher>().HasData(
                 new Teacher { TeacherId = 1,Name ="Teacher1" },
                 new Teacher { TeacherId = 2, Name = "Teacher2" },
-                new Teacher { TeacherId = 3, Name = "Teacher3" }
+                new Teacher { TeacherId = 3, Name = "Teacher3" },
+                new Teacher { TeacherId = 4, Name = "Teacher4" },
+                new Teacher { TeacherId = 5, Name = "Teacher5" },
+                new Teacher { TeacherId = 6, Name = "Teacher6" },
+                new Teacher { TeacherId = 7, Name = "Teacher7" },
+                new Teacher { TeacherId = 8, Name = "Teacher8" }
             );
         }
 
@@ -123,7 +128,13 @@ namespace DAB_AFL2.Data
             modelBuilder.Entity<Course>().HasData(
                 new Course { CourseId = 1,CourseName = "Course1"},
                 new Course { CourseId = 2, CourseName = "Course2" },
-                new Course { CourseId = 3, CourseName = "Course3" }
+                new Course { CourseId = 3, CourseName = "Course3" },
+                new Course { CourseId = 4, CourseName = "Course4" },
+                new Course { CourseId = 5, CourseName = "Course5" },
+                new Course { CourseId = 6, CourseName = "Course6" },
+                new Course { CourseId = 7, CourseName = "Course7" },
+                new Course { CourseId = 8, CourseName = "Course8" },
+                new Course { CourseId = 9, CourseName = "Course9" }
             );
         }
 
@@ -147,7 +158,16 @@ namespace DAB_AFL2.Data
             modelBuilder.Entity<Teacher_Courses>().HasData(
                 new Teacher_Courses { TeacherID = 1, CourseID = 1},
                 new Teacher_Courses { TeacherID = 2, CourseID = 2 },
-                new Teacher_Courses { TeacherID = 3, CourseID = 3 }
+                new Teacher_Courses { TeacherID = 3, CourseID = 3 },
+                new Teacher_Courses { TeacherID = 4, CourseID = 4 },
+                new Teacher_Courses { TeacherID = 5, CourseID = 5 },
+                new Teacher_Courses { TeacherID = 6, CourseID = 6 },
+                new Teacher_Courses { TeacherID = 7, CourseID = 7 },
+                new Teacher_Courses { TeacherID = 8, CourseID = 8 },
+                new Teacher_Courses { TeacherID = 1, CourseID = 9 },
+                new Teacher_Courses { TeacherID = 2, CourseID = 5 },
+                new Teacher_Courses { TeacherID = 3, CourseID = 7 },
+                new Teacher_Courses { TeacherID = 4, CourseID = 9 }
             );
         }
 
@@ -157,7 +177,19 @@ namespace DAB_AFL2.Data
             modelBuilder.Entity<Student>().HasData(
                 new Student { StudentID = 1, Birthday = DateTime.Today, EnrollDate = DateTime.Today,GraduateDate = DateTime.Today, Name = "Student1"},
                 new Student { StudentID = 2, Birthday = DateTime.Today, EnrollDate = DateTime.Today, GraduateDate = DateTime.Today, Name = "Student2" },
-                new Student { StudentID = 3, Birthday = DateTime.Today, EnrollDate = DateTime.Today, GraduateDate = DateTime.Today, Name = "Student3" }
+                new Student { StudentID = 3, Birthday = DateTime.Today, EnrollDate = DateTime.Today, GraduateDate = DateTime.Today, Name = "Student3" },
+                new Student { StudentID = 4, Birthday = DateTime.Today, EnrollDate = DateTime.Today, GraduateDate = DateTime.Today, Name = "Student4" },
+                new Student { StudentID = 5, Birthday = DateTime.Today, EnrollDate = DateTime.Today, GraduateDate = DateTime.Today, Name = "Student5" },
+                new Student { StudentID = 6, Birthday = DateTime.Today, EnrollDate = DateTime.Today, GraduateDate = DateTime.Today, Name = "Student6" },
+                new Student { StudentID = 7, Birthday = DateTime.Today, EnrollDate = DateTime.Today, GraduateDate = DateTime.Today, Name = "Student7" },
+                new Student { StudentID = 8, Birthday = DateTime.Today, EnrollDate = DateTime.Today, GraduateDate = DateTime.Today, Name = "Student8" },
+                new Student { StudentID = 9, Birthday = DateTime.Today, EnrollDate = DateTime.Today, GraduateDate = DateTime.Today, Name = "Student9" },
+                new Student { StudentID = 10, Birthday = DateTime.Today, EnrollDate = DateTime.Today, GraduateDate = DateTime.Today, Name = "Student10" },
+                new Student { StudentID = 11, Birthday = DateTime.Today, EnrollDate = DateTime.Today, GraduateDate = DateTime.Today, Name = "Student11" },
+                new Student { StudentID = 12, Birthday = DateTime.Today, EnrollDate = DateTime.Today, GraduateDate = DateTime.Today, Name = "Student12" },
+                new Student { StudentID = 13, Birthday = DateTime.Today, EnrollDate = DateTime.Today, GraduateDate = DateTime.Today, Name = "Student13" },
+                new Student { StudentID = 14, Birthday = DateTime.Today, EnrollDate = DateTime.Today, GraduateDate = DateTime.Today, Name = "Student14" },
+                new Student { StudentID = 15, Birthday = DateTime.Today, EnrollDate = DateTime.Today, GraduateDate = DateTime.Today, Name = "Student15" }
             );
         }
 
@@ -180,8 +212,26 @@ namespace DAB_AFL2.Data
             //Seeds 3 enrolled in the DB
             modelBuilder.Entity<Enrolled>().HasData(
                 new Enrolled { CourseId = 1, Status = "Active", StudentId = 1 },
-                new Enrolled { CourseId = 2, Status = "Active", StudentId = 2 },
-                new Enrolled { CourseId = 3, Status = "Active", StudentId = 3 }
+                new Enrolled { CourseId = 2, Status = "Active", StudentId = 1 },
+                new Enrolled { CourseId = 3, Status = "Active", StudentId = 2 },
+                new Enrolled { CourseId = 4, Status = "Active", StudentId = 2 },
+                new Enrolled { CourseId = 5, Status = "Active", StudentId = 3 },
+                new Enrolled { CourseId = 6, Status = "Active", StudentId = 3 },
+                new Enrolled { CourseId = 7, Status = "Active", StudentId = 4 },
+                new Enrolled { CourseId = 8, Status = "Active", StudentId = 4 },
+                new Enrolled { CourseId = 9, Status = "Active", StudentId = 5 },
+                new Enrolled { CourseId = 1, Status = "Active", StudentId = 5 },
+                new Enrolled { CourseId = 2, Status = "Active", StudentId = 6 },
+                new Enrolled { CourseId = 3, Status = "Active", StudentId = 7 },
+                new Enrolled { CourseId = 4, Status = "Active", StudentId = 8 },
+                new Enrolled { CourseId = 5, Status = "Active", StudentId = 9 },
+                new Enrolled { CourseId = 6, Status = "Active", StudentId = 10 },
+                new Enrolled { CourseId = 7, Status = "Active", StudentId = 11 },
+                new Enrolled { CourseId = 8, Status = "Active", StudentId = 12 },
+                new Enrolled { CourseId = 9, Status = "Active", StudentId = 13 },
+                new Enrolled { CourseId = 1, Status = "Active", StudentId = 14 },
+                new Enrolled { CourseId = 2, Status = "Active", StudentId = 15 },
+                new Enrolled { CourseId = 3, Status = "Active", StudentId = 15 }
             );
             
         }
@@ -192,8 +242,23 @@ namespace DAB_AFL2.Data
             //Seeds 3 Group in the DB
             modelBuilder.Entity<Group>().HasData(
                 new Group {GroupId = 1,Grade = 0, GroupSize = 4, AssignmentID = 1, TeacherId = 1},
-                new Group { GroupId = 2, Grade = 0, GroupSize = 3, AssignmentID = 2, TeacherId = 2},
-                new Group { GroupId = 3, Grade = 0, GroupSize = 2 , AssignmentID = 3, TeacherId = 3}
+                new Group { GroupId = 2, Grade = 7, GroupSize = 3, AssignmentID = 2, TeacherId = 2},
+                new Group { GroupId = 3, Grade = 4, GroupSize = 2 , AssignmentID = 3, TeacherId = 3},
+                new Group { GroupId = 4, Grade = 0, GroupSize = 4, AssignmentID = 4, TeacherId = 4 },
+                new Group { GroupId = 5, Grade = 7, GroupSize = 3, AssignmentID = 5, TeacherId = 5 },
+                new Group { GroupId = 6, Grade = 0, GroupSize = 2, AssignmentID = 6, TeacherId = 6 },
+                new Group { GroupId = 7, Grade = 4, GroupSize = 4, AssignmentID = 1, TeacherId = 1 },
+                new Group { GroupId = 8, Grade = 0, GroupSize = 3, AssignmentID = 2, TeacherId = 2 },
+                new Group { GroupId = 9, Grade = 7, GroupSize = 2, AssignmentID = 3, TeacherId = 3 },
+                new Group { GroupId = 10, Grade = 0, GroupSize = 4, AssignmentID = 4, TeacherId = 4 },
+                new Group { GroupId = 11, Grade = 4, GroupSize = 3, AssignmentID = 5, TeacherId = 5 },
+                new Group { GroupId = 12, Grade = 0, GroupSize = 2, AssignmentID = 6, TeacherId = 6 },
+                new Group { GroupId = 13, Grade = 4, GroupSize = 4, AssignmentID = 1, TeacherId = 7 },
+                new Group { GroupId = 14, Grade = 0, GroupSize = 3, AssignmentID = 2, TeacherId =  8},
+                new Group { GroupId = 15, Grade = 10, GroupSize = 2, AssignmentID = 3, TeacherId = 1 },
+                new Group { GroupId = 16, Grade = 0, GroupSize = 4, AssignmentID = 4, TeacherId = 2 },
+                new Group { GroupId = 17, Grade = 12, GroupSize = 3, AssignmentID = 5, TeacherId = 3 },
+                new Group { GroupId = 18, Grade = 0, GroupSize = 2, AssignmentID = 6, TeacherId = 4 }
             );
             
         }
@@ -237,8 +302,23 @@ namespace DAB_AFL2.Data
             //Seeds 3 GroupStudents in the DB
             modelBuilder.Entity<GroupStudents>().HasData(
                 new GroupStudents { GroupId = 1, StudentId = 1},
-                new GroupStudents { GroupId = 2, StudentId = 2 },
-                new GroupStudents { GroupId = 3, StudentId = 3 }
+                new GroupStudents { GroupId = 1, StudentId = 2 },
+                new GroupStudents { GroupId = 1, StudentId = 3 },
+                new GroupStudents { GroupId = 2, StudentId = 4 },
+                new GroupStudents { GroupId = 2, StudentId = 5 },
+                new GroupStudents { GroupId = 2, StudentId = 6 },
+                new GroupStudents { GroupId = 3, StudentId = 7 },
+                new GroupStudents { GroupId = 3, StudentId = 8 },
+                new GroupStudents { GroupId = 3, StudentId = 9 },
+                new GroupStudents { GroupId = 4, StudentId = 10 },
+                new GroupStudents { GroupId = 5, StudentId = 11 },
+                new GroupStudents { GroupId = 6, StudentId = 12 },
+                new GroupStudents { GroupId = 7, StudentId = 13 },
+                new GroupStudents { GroupId = 8, StudentId = 14 },
+                new GroupStudents { GroupId = 9, StudentId = 15 },
+                new GroupStudents { GroupId = 10, StudentId = 1 },
+                new GroupStudents { GroupId = 12, StudentId = 2 },
+                new GroupStudents { GroupId = 11, StudentId = 3 }
             );
             
         }
@@ -255,7 +335,10 @@ namespace DAB_AFL2.Data
             modelBuilder.Entity<Assignment>().HasData(
                 new Assignment { AssignmentID = 1, CourseID = 1},
                 new Assignment { AssignmentID = 2, CourseID = 2 },
-                new Assignment { AssignmentID = 3, CourseID = 3 }
+                new Assignment { AssignmentID = 3, CourseID = 3 },
+                new Assignment { AssignmentID = 4, CourseID = 4 },
+                new Assignment { AssignmentID = 5, CourseID = 5 },
+                new Assignment { AssignmentID = 6, CourseID = 6 }
             );
 
         }
