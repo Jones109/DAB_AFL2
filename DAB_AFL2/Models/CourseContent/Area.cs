@@ -10,15 +10,14 @@ namespace DAB_AFL2.Models.CourseContent
     {
         public string ContentUri { get; set; }
        
-        public string MainArea { get; set; }
+        public string Name { get; set; }
 
         [Key]
         public int AreaId { get; set; }
 
-        public string Parent { get; set; }
 
-        [ForeignKey("Folder")]
-        public int FolderId_FK { get; set; }
+        //Many to one with folder
+        public int FolderId { get; set; }
         public Folder Folder { get; set; }
     }
 }

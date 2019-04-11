@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using DAB_AFL2.Models;
 using DAB_AFL2.Repositories;
+using Microsoft.EntityFrameworkCore.Query.Expressions;
 using Microsoft.EntityFrameworkCore.Query.ExpressionVisitors.Internal;
 
 namespace DAB_AFL2
@@ -101,8 +102,38 @@ namespace DAB_AFL2
                                 Console.ReadKey();
                                 break;
                             case 5:
+                                Console.WriteLine("Enter CourseId");
+                                courseId = int.Parse(Console.ReadLine());
 
-                                Console.WriteLine("NOT WORKING YET");
+                                var folders = rep.GetContent(courseId).Result;
+
+                                Console.WriteLine("Folders:");
+                                foreach (var folder in folders)
+                                {
+                                    if (folder.ParentId == null)
+                                    {
+                                        
+                                        Console.WriteLine($"ID: {folder.FolderId} Name: {folder.Name}");
+                                        Console.WriteLine(" Areas:");
+                                        foreach (var area in folder.Areas)
+                                        {
+                                            Console.WriteLine($"    Name: {area.Name} Content: {area.ContentUri} ID: {area.AreaId}");
+                                        }
+                                    }
+                                    else
+                                    {
+                                        
+                                        Console.WriteLine($"ID: {folder.FolderId} Name: {folder.Name} ParentID: {folder.ParentId}");
+                                        Console.WriteLine(" Areas:");
+                                        foreach (var area in folder.Areas)
+                                        {
+                                            Console.WriteLine($"    Name: {area.Name} Content: {area.ContentUri} ID: {area.AreaId}");
+                                        }
+                                    }
+
+                                    
+                                }
+
                                 Console.WriteLine(".... PRESS ANY KEY TO CONTINUE");
                                 Console.ReadKey();
                                 break;

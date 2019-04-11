@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAB_AFL2.Migrations
 {
     [DbContext(typeof(BlackboardDbContext))]
-    [Migration("20190411113229_TobiasErBoss2")]
-    partial class TobiasErBoss2
+    [Migration("20190411181253_1")]
+    partial class _1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -160,16 +160,13 @@ namespace DAB_AFL2.Migrations
 
                     b.Property<string>("ContentUri");
 
-                    b.Property<int>("FolderId_FK");
+                    b.Property<int>("FolderId");
 
-                    b.Property<string>("MainArea");
-
-                    b.Property<string>("Parent");
+                    b.Property<string>("Name");
 
                     b.HasKey("AreaId");
 
-                    b.HasIndex("FolderId_FK")
-                        .IsUnique();
+                    b.HasIndex("FolderId");
 
                     b.ToTable("Areas");
 
@@ -177,16 +174,9 @@ namespace DAB_AFL2.Migrations
                         new
                         {
                             AreaId = 1,
-                            ContentUri = "SupBro",
-                            FolderId_FK = 1,
-                            MainArea = "THIS IS A MAIN AREA"
-                        },
-                        new
-                        {
-                            AreaId = 2,
-                            ContentUri = "SupHo",
-                            FolderId_FK = 0,
-                            Parent = "Sub area to main area"
+                            ContentUri = "Content1",
+                            FolderId = 1,
+                            Name = "Area1"
                         });
                 });
 
@@ -200,11 +190,13 @@ namespace DAB_AFL2.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<int>("Parent");
+                    b.Property<int?>("ParentId");
 
                     b.HasKey("FolderId");
 
                     b.HasIndex("Course_FK");
+
+                    b.HasIndex("ParentId");
 
                     b.ToTable("Folders");
 
@@ -213,71 +205,62 @@ namespace DAB_AFL2.Migrations
                         {
                             FolderId = 1,
                             Course_FK = 1,
-                            Name = "Folder1",
-                            Parent = 0
+                            Name = "Folder1"
                         },
                         new
                         {
                             FolderId = 2,
                             Course_FK = 1,
-                            Name = "Folder2",
-                            Parent = 0
+                            Name = "Folder2"
                         },
                         new
                         {
                             FolderId = 3,
                             Course_FK = 1,
-                            Name = "Folder3",
-                            Parent = 0
+                            Name = "Folder3"
                         },
                         new
                         {
                             FolderId = 4,
                             Course_FK = 2,
-                            Name = "Folder4",
-                            Parent = 0
+                            Name = "Folder4"
                         },
                         new
                         {
                             FolderId = 5,
                             Course_FK = 2,
-                            Name = "Folder5",
-                            Parent = 0
+                            Name = "Folder5"
                         },
                         new
                         {
                             FolderId = 6,
                             Course_FK = 2,
-                            Name = "Folder6",
-                            Parent = 0
+                            Name = "Folder6"
                         },
                         new
                         {
                             FolderId = 7,
                             Course_FK = 3,
-                            Name = "Folder7",
-                            Parent = 0
+                            Name = "Folder7"
                         },
                         new
                         {
                             FolderId = 8,
                             Course_FK = 3,
-                            Name = "Folder8",
-                            Parent = 0
+                            Name = "Folder8"
                         },
                         new
                         {
                             FolderId = 9,
                             Course_FK = 3,
-                            Name = "Folder9",
-                            Parent = 0
+                            Name = "Folder9"
                         },
                         new
                         {
                             FolderId = 10,
                             Course_FK = 1,
                             Name = "Folder10",
-                            Parent = 1
+                            ParentId = 1
                         });
                 });
 
@@ -1038,8 +1021,8 @@ namespace DAB_AFL2.Migrations
             modelBuilder.Entity("DAB_AFL2.Models.CourseContent.Area", b =>
                 {
                     b.HasOne("DAB_AFL2.Models.CourseContent.Folder", "Folder")
-                        .WithOne("Area")
-                        .HasForeignKey("DAB_AFL2.Models.CourseContent.Area", "FolderId_FK")
+                        .WithMany("Areas")
+                        .HasForeignKey("FolderId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -1049,6 +1032,10 @@ namespace DAB_AFL2.Migrations
                         .WithMany("Folders")
                         .HasForeignKey("Course_FK")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("DAB_AFL2.Models.CourseContent.Folder", "ParentFolder")
+                        .WithMany()
+                        .HasForeignKey("ParentId");
                 });
 
             modelBuilder.Entity("DAB_AFL2.Models.Enrolled", b =>

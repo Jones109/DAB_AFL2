@@ -14,9 +14,12 @@ namespace DAB_AFL2.Models.CourseContent
 
         public string Name { get; set; }
 
-        public int Parent { get; set; }
+        public int? ParentId { get; set; }
+        public Folder ParentFolder { get; set; }
 
-        public Area Area { get; set; }
+
+        //one to many with Area
+        public List<Area> Areas { get; set; }
 
         [Required]
         [ForeignKey("Course")]

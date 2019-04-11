@@ -11,7 +11,7 @@ namespace DAB_AFL2.Models
         [Key]
         public int EventId { get; set; }
         [Required] 
-        public DateTime StarTime { get; set; }
+        public DateTime StartTime { get; set; }
         [Required]
         public DateTime EndTime { get; set; }
         [Required]

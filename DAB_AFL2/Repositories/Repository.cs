@@ -42,6 +42,26 @@ namespace DAB_AFL2.Repositories
         }
 
 
+        #region ContentArea
+
+        public async Task<List<Folder>> GetContent(int courseId)
+        {
+            if (CourseExists(courseId).Result)
+            {
+                using (var context = new BlackboardDbContext(_options))
+                {
+
+                    var folders = await context.Folders.Where(x => x.Course_FK == courseId).Include(x=>x.Areas).ToListAsync();
+                    return folders;
+                }
+            }
+
+            return null;
+        }
+
+        #endregion
+
+
         #region Group
 
         public async void GradeGroup(int groupId, int grade)

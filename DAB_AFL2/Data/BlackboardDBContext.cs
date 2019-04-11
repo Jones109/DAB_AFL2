@@ -61,37 +61,55 @@ namespace DAB_AFL2.Data
 
         private void CourseContentOnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Folder>()
-                .HasOne(t => t.Area)
-                .WithOne(t => t.Folder)
-                .HasForeignKey<Area>();
-
+ 
             modelBuilder.Entity<Course>()
                 .HasMany(c => c.Folders)
                 .WithOne(a => a.Course)
                 .HasForeignKey(a => a.Course_FK);
 
+
+
             modelBuilder.Entity<Folder>()
-                .Property(a => a.FolderId)
-                .ValueGeneratedOnAdd();
+                .HasOne(f => f.ParentFolder)
+                .WithMany()
+                .HasForeignKey(p => p.ParentId);
+
+
+            modelBuilder.Entity<Folder>()
+                .HasMany(f => f.Areas)
+                .WithOne(a => a.Folder)
+                .HasForeignKey(a => a.FolderId);
 
             modelBuilder.Entity<Folder>().HasData(
-                new Folder { Course_FK = 1, Name = "Folder1", FolderId = 1 },
+                new Folder { Course_FK = 1, Name = "Folder1", FolderId = 1},
                 new Folder { Course_FK = 1, Name = "Folder2", FolderId = 2 },
                 new Folder { Course_FK = 1, Name = "Folder3", FolderId = 3 },
                 new Folder { Course_FK = 2, Name = "Folder4", FolderId = 4 },
-                new Folder { Course_FK = 2, Name = "Folder5", FolderId = 5 },
-                new Folder { Course_FK = 2, Name = "Folder6", FolderId = 6 },
-                new Folder { Course_FK = 3, Name = "Folder7", FolderId = 7 },
-                new Folder { Course_FK = 3, Name = "Folder8", FolderId = 8 },
-                new Folder { Course_FK = 3, Name = "Folder9", FolderId = 9 },
-                new Folder { Course_FK = 1, Name = "Folder10", FolderId = 10,Parent = 1}
+                new Folder { Course_FK = 2, Name = "Folder5", FolderId = 5},
+                new Folder { Course_FK = 2, Name = "Folder6", FolderId = 6},
+                new Folder { Course_FK = 3, Name = "Folder7", FolderId = 7},
+                new Folder { Course_FK = 3, Name = "Folder8", FolderId = 8},
+                new Folder { Course_FK = 3, Name = "Folder9", FolderId = 9},
+                new Folder { Course_FK = 1, Name = "Folder10", FolderId = 10,ParentId = 1}
             );
-
+            
             modelBuilder.Entity<Area>().HasData(
-                new Area { ContentUri = "SupBro", MainArea = "THIS IS A MAIN AREA", AreaId = 1, FolderId_FK = 1},
-                new Area { ContentUri = "SupHo", Parent = "Sub area to main area", AreaId = 2}
+                new Area { ContentUri = "Content1", Name = "Area1", AreaId = 1, FolderId = 1},
+            new Area { ContentUri = "Content2", Name = "Area2", AreaId = 2, FolderId = 2 },
+            new Area { ContentUri = "Content3", Name = "Area3", AreaId = 3, FolderId = 3 },
+            new Area { ContentUri = "Content4", Name = "Area4", AreaId = 4, FolderId = 4 },
+            new Area { ContentUri = "Content5", Name = "Area5", AreaId = 5, FolderId = 5 },
+            new Area { ContentUri = "Content6", Name = "Area6", AreaId = 6, FolderId = 10 },
+            new Area { ContentUri = "Content7", Name = "Area7", AreaId = 7, FolderId = 10 },
+            new Area { ContentUri = "Content8", Name = "Area8", AreaId = 8, FolderId = 1 },
+            new Area { ContentUri = "Content9", Name = "Area9", AreaId = 9, FolderId = 1 },
+            new Area { ContentUri = "Content10", Name = "Area10", AreaId = 10, FolderId = 2 },
+            new Area { ContentUri = "Content11", Name = "Area11", AreaId = 11, FolderId = 3 },
+            new Area { ContentUri = "Content12", Name = "Area12", AreaId = 12, FolderId = 4 },
+            new Area { ContentUri = "Content13", Name = "Area13", AreaId = 13, FolderId = 5 }
+
             );
+            
         }
 
 
