@@ -67,9 +67,8 @@ namespace DAB_AFL2
                                 Console.WriteLine($"Student with id: {studentId} is enrolled in the following courses:");
                                 foreach (var SpecificCourse in rep.GetCourses(studentId).Result)
                                 {
-                                    Console.WriteLine($"CourseId: {SpecificCourse.CourseId} Course name: {SpecificCourse.CourseName}");
+                                    Console.WriteLine($"CourseId: {SpecificCourse.CourseId} Course name: {SpecificCourse.CourseName} Student Status: {SpecificCourse.Enrolled.Find(x=>x.StudentId==studentId).Status}, Grade: {SpecificCourse.Enrolled.Find(x => x.StudentId == studentId).Grade}");
                                 }
-                                Console.WriteLine("NOT WORKING YET");
                                 Console.WriteLine(".... PRESS ANY KEY TO CONTINUE");
                                 Console.ReadKey();
 
@@ -112,7 +111,7 @@ namespace DAB_AFL2
                                 Console.WriteLine("Listing all events");
                                 Calendar cal = rep.GetCalendar().Result;
 
-                                if (cal.Events != null)
+                                if (cal.Events != null && cal.Events.Count > 0)
                                 {
                                     foreach (var eventDate in cal.Events)
                                     {
@@ -127,6 +126,25 @@ namespace DAB_AFL2
                                 }
                                 Console.WriteLine("Press any key to continue..");
                                 Console.ReadKey();
+                                break;
+                            case 7:
+                                Console.WriteLine("Listing all assignments for student");
+                                Console.WriteLine("Enter studentID");
+                                var studentID = int.Parse(Console.ReadLine());
+                                Console.WriteLine("Enter Course ID");
+                                var courseID = int.Parse(Console.ReadLine());
+
+                                Console.WriteLine($"Listing all assignments for Student {studentID} in course {courseID}");
+                                foreach (var group in rep.GetAssignments(studentID, courseID).Result.FindAll(g => g.Assignment.CourseID == courseID))
+                                {
+                                    if (group.Assignment.Description != null)
+                                    Console.WriteLine($"Assignment Description: {group.Assignment.Description}");
+                                    Console.WriteLine($"Assignment grade: {group.Grade}");
+                                    Console.WriteLine($"Graded by: {group.Teacher.Name}");
+                                }
+                                Console.WriteLine(".... PRESS ANY KEY TO CONTINUE");
+                                Console.ReadKey();
+
                                 break;
                             case 0:
                                 break;

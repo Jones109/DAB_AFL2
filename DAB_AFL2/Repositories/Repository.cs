@@ -80,15 +80,21 @@ namespace DAB_AFL2.Repositories
         }
         public async Task<Course> GetCourseStudentsAndTeachers(int id)
         {
-            using (var context = new BlackboardDbContext(_options))
+            if (CourseExists(id).Result)
             {
-               
-                var course = await context.Courses.Where(c => c.CourseId == id).Include(c=> c.Teacher_Courses).ThenInclude(t=> t.Teacher)
-                    .Include(c=> c.Enrolled).ThenInclude(e => e.Student).FirstAsync();
+                using (var context = new BlackboardDbContext(_options))
+                {
 
-                return course;
+                    var course = await context.Courses.Where(c => c.CourseId == id).Include(c => c.Teacher_Courses).ThenInclude(t => t.Teacher)
+                        .Include(c => c.Enrolled).ThenInclude(e => e.Student).FirstAsync();
+
+                    return course;
+                }
+
             }
-            
+
+            return null;
+
 
         }
 
@@ -96,11 +102,11 @@ namespace DAB_AFL2.Repositories
 
         public async Task<List<Course>> GetCourses(int studentId)
         {
-            if (IfAnyCourses().Result)
+            if (IfAnyCourses().Result && StudentExists(studentId).Result)
             {
                 using (var context = new BlackboardDbContext(_options))
                 {
-                    var courses = await context.Courses.Where(e => e.Enrolled.Any(s => s.StudentId == studentId)).ToListAsync();
+                    var courses = await context.Courses.Where(e => e.Enrolled.Any(s => s.StudentId == studentId)).Include(e=>e.Enrolled).ToListAsync();
 
                     return courses;
                 }
@@ -157,20 +163,25 @@ namespace DAB_AFL2.Repositories
             return null;
         }
 
-        /*
-        public async void GetAssignments(int studentID, int courseID)
+        /// <summary>
+        /// Gets all the assignments for a student in a course
+        /// </summary>
+        /// <param name="studentID"></param>
+        /// <param name="courseID"></param>
+        public async Task<List<Group>> GetAssignments(int studentID, int courseID)
         {
             using (var context = new BlackboardDbContext(_options))
             {
-                //var assignments = await context.Assignments
-                    //Courses.Where(e => e.Enrolled.Where()).ToListAsync();
+                //All the groups that the student is in
+                var groups = await context.Groups.Where(gs => gs.GroupStudents.Any(s => s.StudentId == studentID))
+                    .Include(g => g.Teacher)
+                    .Include(g =>g.Assignment).ThenInclude(c=>c.Course).ToListAsync();
 
+                return groups;
 
-
-                //return courses;
             }
         }
-        */
+        
 
         public void InsertStudent(string name, DateTime birthdate)
         {
@@ -296,7 +307,29 @@ namespace DAB_AFL2.Repositories
             }
         }
 
-         private async Task<bool> IfAnyFolders()
+        private async Task<bool> StudentExists(int id)
+        {
+            using (var context = new BlackboardDbContext(_options))
+            {
+                if (await context.Students
+                    .AnyAsync(h => h.StudentID == id))
+                    return true;
+                return false;
+            }
+        }
+
+
+        private async Task<bool> CourseExists(int id)
+        {
+            using (var context = new BlackboardDbContext(_options))
+            {
+                if (await context.Courses
+                    .AnyAsync(h => h.CourseId == id))
+                    return true;
+                return false;
+            }
+        }
+        private async Task<bool> IfAnyFolders()
          {
              using (var context = new BlackboardDbContext(_options))
              {

@@ -8,6 +8,8 @@ namespace DAB_AFL2.Models
     public class Calendar
     {
         public int CalendarId { get; set; }
+
+       public string CalendarName { get; set; }
         public List<Event> Events { get; set; }
     }
 }
