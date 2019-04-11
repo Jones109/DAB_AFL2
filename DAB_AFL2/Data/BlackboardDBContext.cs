@@ -267,14 +267,14 @@ namespace DAB_AFL2.Data
         {
 
             BlackboardDbContext b = new BlackboardDbContext();
-            b.Database.ExecuteSqlCommand("SET IDENTITY_INSERT dbo.Calendar ON");
+           // b.Database.ExecuteSqlCommand("SET IDENTITY_INSERT Calendars ON");
             modelBuilder.Entity<Calendar>()
                 .HasMany(c => c.Events)
                 .WithOne(a => a.Calendar)
                 .HasForeignKey(a => a.CalendarId);
 
             modelBuilder.Entity<Calendar>().HasData(
-                new Calendar()
+                new Calendar { CalendarName = "Main Calendar"}
             );
 
         }
