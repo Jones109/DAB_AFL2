@@ -21,6 +21,25 @@ namespace DAB_AFL2.Repositories
                 .Options;
         }
 
+
+        public async void Enroll(int courseId, int studentId, string status)
+        {
+            using (var context = new BlackboardDbContext(_options))
+            {
+                Enrolled enroll = new Enrolled
+                {
+                    CourseId = courseId,
+                    StudentId = studentId,
+                    Status =status
+                };
+
+                await context.Enrolled.AddAsync(enroll);
+                await context.SaveChangesAsync();
+
+            }
+
+        }
+
         #region Courses
         public async Task<List<Course>> GetCourses()
         {
