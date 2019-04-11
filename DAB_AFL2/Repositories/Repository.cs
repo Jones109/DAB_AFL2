@@ -163,20 +163,25 @@ namespace DAB_AFL2.Repositories
             return null;
         }
 
-        /*
-        public async void GetAssignments(int studentID, int courseID)
+        /// <summary>
+        /// Gets all the assignments for a student in a course
+        /// </summary>
+        /// <param name="studentID"></param>
+        /// <param name="courseID"></param>
+        public async Task<List<Group>> GetAssignments(int studentID, int courseID)
         {
             using (var context = new BlackboardDbContext(_options))
             {
-                //var assignments = await context.Assignments
-                    //Courses.Where(e => e.Enrolled.Where()).ToListAsync();
+                //All the groups that the student is in
+                var groups = await context.Groups.Where(gs => gs.GroupStudents.Any(s => s.StudentId == studentID))
+                    .Include(g => g.Teacher)
+                    .Include(g =>g.Assignment).ThenInclude(c=>c.Course).ToListAsync();
 
+                return groups;
 
-
-                //return courses;
             }
         }
-        */
+        
 
         public void InsertStudent(string name, DateTime birthdate)
         {
