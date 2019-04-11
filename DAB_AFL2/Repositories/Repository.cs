@@ -43,8 +43,8 @@ namespace DAB_AFL2.Repositories
             {
                 using (var context = new BlackboardDbContext(_options))
                 {
-                    //dc.Students.Where(s => s.StudentCourseEnrollments.Any(e => e.Course.CourseID == courseID)
-                    var courses = await context.Courses.Where(e => e.Enrolled.Any(s => s.StudentId == studentId)).ToListAsync();
+
+                    var courses = await context.Courses.ToListAsync();
 
                     return courses;
                 }
@@ -52,19 +52,19 @@ namespace DAB_AFL2.Repositories
             return null;
         }
 
-        #endregion
-
-        public async Task<List<Teacher>> GetTeachers(int courseId)
+        public void InsertCourse(string CourseName)
         {
             using (var context = new BlackboardDbContext(_options))
             {
-                
-                
-            
+                Course course = new Course();
+                course.CourseName = CourseName;
+
+                context.Courses.Add(course);
+                context.SaveChanges();
             }
-            
-            return null;
         }
+
+        #endregion
 
 
 
@@ -83,24 +83,63 @@ namespace DAB_AFL2.Repositories
             return null;
         }
 
-        public async void AddStudent(string name, DateTime birthday, DateTime enrollDate, DateTime graduateDate){
-        
+        public void InsertStudent(string name, DateTime birthdate)
+        {
             using (var context = new BlackboardDbContext(_options))
             {
+                Student student = new Student();
+                student.Name = name;
+                student.Birthday = birthdate;
+                student.EnrollDate = DateTime.Now;
+                student.GraduateDate = DateTime.Now.AddYears(3);
 
-                Student newStudent = new Student
-                {
-                    Name = name,
-                    Birthday = birthday,
-                    EnrollDate = enrollDate,
-                    GraduateDate = graduateDate
-
-                };
-                await context.Students.AddAsync(newStudent);
-                await context.SaveChangesAsync();
+                context.Students.Add(student);
+                context.SaveChanges();
             }
         }
+        #endregion
 
+        #region CalenderEvents
+        public async Task<Calendar> GetCalendar()
+        {
+            if (IfAnyCalendar().Result)
+            {
+                using (var context = new BlackboardDbContext(_options))
+                {
+                    var calendar = await context.Calendars.Include(c => c.Events).FirstAsync();
+                    
+                    return calendar;
+                }
+            }
+            return null;
+        }
+
+        public void InsertEventToCalendar(string Description,DateTime start,DateTime end)
+        {
+            if (IfAnyCalendar().Result)
+            {
+                using (var context = new BlackboardDbContext(_options))
+                {
+                    var calendar =  context.Calendars.First();
+                    if(calendar.Events == null)
+                    {
+                        calendar.Events = new List<Event>();
+                    }
+                    Event even = new Event();
+                    even.CalendarId = calendar.CalendarId;
+                    even.Calendar = calendar;
+                    even.Description = Description;
+                    even.EndTime = end;
+                    even.StarTime = start;
+
+                    calendar.Events.Add(even);
+
+                    context.Events.Add(even);
+                    context.SaveChanges();
+                }
+            }
+
+        }
         #endregion
 
         private async Task<bool> IfAnyCourses()
@@ -112,7 +151,7 @@ namespace DAB_AFL2.Repositories
             }
         }
 
-         private async Task<bool> IfAnyStudents()
+        private async Task<bool> IfAnyStudents()
         {
             using (var context = new BlackboardDbContext(_options))
             {
@@ -121,6 +160,15 @@ namespace DAB_AFL2.Repositories
             }
         }
 
-        
+        private async Task<bool> IfAnyCalendar()
+        {
+            using (var context = new BlackboardDbContext(_options))
+            {
+                bool result = await context.Calendars.AnyAsync();
+                return result;
+            }
+        }
+
+
     }
 }
