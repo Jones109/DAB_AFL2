@@ -21,6 +21,25 @@ namespace DAB_AFL2.Repositories
                 .Options;
         }
 
+
+        public async void Enroll(int courseId, int studentId, string status)
+        {
+            using (var context = new BlackboardDbContext(_options))
+            {
+                Enrolled enroll = new Enrolled
+                {
+                    CourseId = courseId,
+                    StudentId = studentId,
+                    Status =status
+                };
+
+                await context.Enrolled.AddAsync(enroll);
+                await context.SaveChangesAsync();
+
+            }
+
+        }
+
         #region Courses
         public async Task<List<Course>> GetCourses()
         {
@@ -155,6 +174,32 @@ namespace DAB_AFL2.Repositories
         }
         #endregion
 
+
+        #region Assignment
+
+        public async void AddAssignment(string description)
+        {
+            using (var context = new BlackboardDbContext(_options))
+            {
+                Assignment newAssignment = new Assignment
+                {
+
+                    CourseID = 1,
+                    Description = description
+
+                };
+
+
+                await context.Assignments.AddAsync(newAssignment);
+                await context.SaveChangesAsync();
+            }
+
+
+        }
+
+        #endregion
+
+       
         private async Task<bool> IfAnyCourses()
         {
             using (var context = new BlackboardDbContext(_options))
@@ -181,6 +226,8 @@ namespace DAB_AFL2.Repositories
                 return result;
             }
         }
+
+        
 
 
     }
