@@ -106,14 +106,6 @@ namespace DAB_AFL2
                                 Console.WriteLine("Press any key to continue..");
                                 Console.ReadKey();
                                 break;
-
-                            case 7:
-                                Console.WriteLine("Enter studentID");
-                                var studentID = Console.ReadLine();
-                                Console.WriteLine("Enter CourseID");
-                                var courseID = Console.ReadLine();
-                                break;
-
                             case 0:
                                 break;
                         }
@@ -124,9 +116,13 @@ namespace DAB_AFL2
                         break;
                     case 2:
                         //Insert start
-                        Console.WriteLine("Insert new student press 1");
-                        Console.WriteLine("Insert new course press 2");
-                        Console.WriteLine("Insert new event press 3");
+                        Console.WriteLine("Insert new student press, 1");
+                        Console.WriteLine("Insert new course press, 2");
+                        Console.WriteLine("Insert new event press, 3");
+                        Console.WriteLine("Insert new Assignment, press 4");
+                        Console.WriteLine("Enroll a student in a course, press 5");
+                        Console.WriteLine("Grade Assignment, press 6");
+                        
 
                         viewChoice = int.Parse(Console.ReadLine());
                         switch (viewChoice)
@@ -167,6 +163,35 @@ namespace DAB_AFL2
                                 Console.WriteLine("success, press any key to continue..");
                                 Console.ReadKey();
                                 break;
+                            case 4:
+                                Console.WriteLine("Write the description of the Assignment");
+                                string description = Console.ReadLine();
+                                rep.AddAssignment(description);
+                                Console.WriteLine("success, press any key to continue..");
+                                Console.ReadKey();
+                                break;
+                            case 5:
+                                Console.WriteLine("Write the id of the student you want to enroll");
+                                int studentId = int.Parse(Console.ReadLine());
+                                Console.WriteLine("Write the id of the course you want to enroll the student in");
+                                int courseId = int.Parse(Console.ReadLine());
+                                Console.WriteLine("Write the status the student has for the Course");
+                                string status = Console.ReadLine();
+
+                                rep.Enroll(courseId,studentId,status);
+
+                                Console.WriteLine("success, press any key to continue..");
+                                Console.ReadKey();
+                                break;
+                            case 6:
+                                Console.WriteLine("Enter id of group you wish to grade");
+                                int groupId = int.Parse(Console.ReadLine());
+                                Console.WriteLine("Enter grade");
+                                int grade = int.Parse(Console.ReadLine());
+
+
+                                break;
+
                             default:
                                 break;
 
