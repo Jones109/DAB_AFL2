@@ -163,20 +163,43 @@ namespace DAB_AFL2.Repositories
             return null;
         }
 
-        /*
-        public async void GetAssignments(int studentID, int courseID)
+        /// <summary>
+        /// Gets all the assignments for a student in a course
+        /// </summary>
+        /// <param name="studentID"></param>
+        /// <param name="courseID"></param>
+        public async Task<List<Group>> GetAssignments(int studentID, int courseID)
         {
             using (var context = new BlackboardDbContext(_options))
             {
-                //var assignments = await context.Assignments
-                    //Courses.Where(e => e.Enrolled.Where()).ToListAsync();
+                //All the groups that the student is in
+                var groups = await context.Groups.Where(gs => gs.GroupStudents.Any(s => s.StudentId == studentID))
+                    .Include(g =>g.Assignment).ThenInclude(c=>c.Course).ToListAsync();
+
+                return groups;
+                foreach (var group in groups.FindAll(g=> g.Assignment.CourseID == courseID))
+                {
+                     Console.WriteLine(group.Assignment.Description);
+                }
+                /*
+
+                courses = courses.Where(c => c.CourseId == courseID).ToList(); //the wanted course
 
 
+                var assignments = courses.Where(a => a.Assignments.Any(b => b.CourseID == courseID)).ToList();
 
-                //return courses;
+                Console.WriteLine($"Student {studentID} is enrolled in course {courseID} with Assignments:"
+                foreach (var assignment in courses)
+                {
+                    foreach (var VARIABLE in assignment.Assignments)
+                    {
+                        Console.WriteLine(VARIABLE.AssignmentID);
+                    }
+                }
+                */
             }
         }
-        */
+        
 
         public void InsertStudent(string name, DateTime birthdate)
         {
