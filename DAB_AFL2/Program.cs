@@ -34,7 +34,7 @@ namespace DAB_AFL2
                         Console.WriteLine("List all Courses for specific student: Enter '3'");
                         Console.WriteLine("List all Students and Teachers for specific Course: Enter '4'");
                         Console.WriteLine("List Content for specific course: Enter '5'");
-                        Console.WriteLine("");
+                        Console.WriteLine("List all events from calendar: Enter '6'");
 
                         Console.WriteLine("Go back: Enter '0'");
                         int viewChoice = int.Parse(Console.ReadLine());
@@ -83,6 +83,27 @@ namespace DAB_AFL2
                                 Console.WriteLine(".... PRESS ANY KEY TO CONTINUE");
                                 Console.ReadKey();
                                 break;
+                            case 6:
+                                //events
+                                Console.WriteLine("Listing all events");
+                                Calendar cal = rep.GetCalendar().Result;
+
+                                if (cal.Events != null)
+                                {
+                                    foreach (var eventDate in cal.Events)
+                                    {
+                                        Console.WriteLine("Start: " + eventDate.StarTime);
+                                        Console.WriteLine("End: " + eventDate.EndTime);
+                                        Console.WriteLine("Description : \n" + eventDate.Description + "\n\n");
+                                    }
+                                }
+                                else
+                                {
+                                    Console.WriteLine("The calender is empty.. No events for now");;
+                                }
+                                Console.WriteLine("Press any key to continue..");
+                                Console.ReadKey();
+                                break;
                             case 0:
 
                                 break;
@@ -122,11 +143,18 @@ namespace DAB_AFL2
                                 break;
                             case 3:
                                 //new event
-                                Console.WriteLine("Write the name of your event");
+                                Console.WriteLine("Write the desciption of your event");
                                 string eventName = Console.ReadLine();
-                                Console.WriteLine("Write the date of your event");
+
+                                Console.WriteLine("Write the start datetime of your event");
                                 string eventDateSting = Console.ReadLine();
-                                DateTime eventDate = CheckIfStringIsDate(eventDateSting);
+                                DateTime eventStartDate = CheckIfStringIsDate(eventDateSting);
+
+                                Console.WriteLine("Write the end datetime of your event");
+                                string eventEndDateSting = Console.ReadLine();
+                                DateTime eventEndDate = CheckIfStringIsDate(eventEndDateSting);
+
+                                rep.InsertEventToCalendar(eventName, eventStartDate, eventEndDate);
                                 Console.WriteLine("success, press any key to continue..");
                                 Console.ReadKey();
                                 break;

@@ -83,7 +83,7 @@ namespace DAB_AFL2.Repositories
             return null;
         }
 
-        public void InsertStudent(string name,DateTime birthdate)
+        public void InsertStudent(string name, DateTime birthdate)
         {
             using (var context = new BlackboardDbContext(_options))
             {
@@ -99,6 +99,49 @@ namespace DAB_AFL2.Repositories
         }
         #endregion
 
+        #region CalenderEvents
+        public async Task<Calendar> GetCalendar()
+        {
+            if (IfAnyCalendar().Result)
+            {
+                using (var context = new BlackboardDbContext(_options))
+                {
+                    var calendar = await context.Calendars.Include(c => c.Events).FirstAsync();
+                    
+                    return calendar;
+                }
+            }
+            return null;
+        }
+
+        public void InsertEventToCalendar(string Description,DateTime start,DateTime end)
+        {
+            if (IfAnyCalendar().Result)
+            {
+                using (var context = new BlackboardDbContext(_options))
+                {
+                    var calendar =  context.Calendars.First();
+                    if(calendar.Events == null)
+                    {
+                        calendar.Events = new List<Event>();
+                    }
+                    Event even = new Event();
+                    even.CalendarId = calendar.CalendarId;
+                    even.Calendar = calendar;
+                    even.Description = Description;
+                    even.EndTime = end;
+                    even.StarTime = start;
+
+                    calendar.Events.Add(even);
+
+                    context.Events.Add(even);
+                    context.SaveChanges();
+                }
+            }
+
+        }
+        #endregion
+
         private async Task<bool> IfAnyCourses()
         {
             using (var context = new BlackboardDbContext(_options))
@@ -108,7 +151,7 @@ namespace DAB_AFL2.Repositories
             }
         }
 
-         private async Task<bool> IfAnyStudents()
+        private async Task<bool> IfAnyStudents()
         {
             using (var context = new BlackboardDbContext(_options))
             {
@@ -117,7 +160,14 @@ namespace DAB_AFL2.Repositories
             }
         }
 
-
+        private async Task<bool> IfAnyCalendar()
+        {
+            using (var context = new BlackboardDbContext(_options))
+            {
+                bool result = await context.Calendars.AnyAsync();
+                return result;
+            }
+        }
 
 
     }
