@@ -191,6 +191,9 @@ namespace DAB_AFL2
                                 int grade = int.Parse(Console.ReadLine());
 
 
+                                rep.GradeGroup(groupId,grade);
+                                Console.WriteLine("success, press any key to continue..");
+                                Console.ReadKey();
                                 break;
 
                             default:

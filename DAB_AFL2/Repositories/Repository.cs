@@ -40,6 +40,29 @@ namespace DAB_AFL2.Repositories
 
         }
 
+
+        #region Group
+
+        public async void GradeGroup(int groupId, int grade)
+        {
+            if (GroupExists(groupId).Result)
+            {
+                using (var context = new BlackboardDbContext(_options))
+                {
+                    var entity = await context.Groups.FirstOrDefaultAsync(
+                        x => x.GroupId == groupId);
+
+                    entity.Grade = grade;
+                    context.Update(entity);
+                    await context.SaveChangesAsync();
+                }
+            }
+            
+
+        }
+
+        #endregion
+
         #region Courses
         public async Task<List<Course>> GetCourses()
         {
@@ -214,8 +237,17 @@ namespace DAB_AFL2.Repositories
             }
         }
 
-        
 
+        private async Task<bool> GroupExists(int id)
+        {
+            using (var context = new BlackboardDbContext(_options))
+            {
+                if (await context.Groups
+                    .AnyAsync(h => h.GroupId == id))
+                    return true;
+                return false;
+            }
+        }
 
     }
 }
