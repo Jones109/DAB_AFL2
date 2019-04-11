@@ -99,7 +99,7 @@ namespace DAB_AFL2.Repositories
             {
                 using (var context = new BlackboardDbContext(_options))
                 {
-                    var courses = await context.Courses.Where(e => e.Enrolled.Any(s => s.StudentId == studentId)).ToListAsync();
+                    var courses = await context.Courses.Where(e => e.Enrolled.Any(s => s.StudentId == studentId)).Include(e=>e.Enrolled).ToListAsync();
 
                     return courses;
                 }

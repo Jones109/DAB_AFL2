@@ -67,9 +67,8 @@ namespace DAB_AFL2
                                 Console.WriteLine($"Student with id: {studentId} is enrolled in the following courses:");
                                 foreach (var SpecificCourse in rep.GetCourses(studentId).Result)
                                 {
-                                    Console.WriteLine($"CourseId: {SpecificCourse.CourseId} Course name: {SpecificCourse.CourseName}");
+                                    Console.WriteLine($"CourseId: {SpecificCourse.CourseId} Course name: {SpecificCourse.CourseName} Student Status: {SpecificCourse.Enrolled.Find(x=>x.StudentId==studentId).Status}, Grade: {SpecificCourse.Enrolled.Find(x => x.StudentId == studentId).Grade}");
                                 }
-                                Console.WriteLine("NOT WORKING YET");
                                 Console.WriteLine(".... PRESS ANY KEY TO CONTINUE");
                                 Console.ReadKey();
 

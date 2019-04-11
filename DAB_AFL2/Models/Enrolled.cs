@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Runtime.ConstrainedExecution;
 using System.Text;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 
@@ -10,6 +11,8 @@ namespace DAB_AFL2.Models
     {
         [Required]
         public int CourseId { get; set; }
+
+        public int Grade { get; set; }
 
         public Course Course { get; set; }
 
