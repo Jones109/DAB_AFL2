@@ -55,7 +55,8 @@ namespace DAB_AFL2.Data
             GroupStudentsOnModelCreating(modelBuilder);
             Teacher_CoursesOnModelCreating(modelBuilder);
             CourseContentOnModelCreating(modelBuilder);
-
+            CalendarOnModelCreating(modelBuilder);
+            EventOnModelCreating(modelBuilder);
         }
 
 
@@ -283,26 +284,26 @@ namespace DAB_AFL2.Data
 
         private void CalendarOnModelCreating(ModelBuilder modelBuilder)
         {
-
-            BlackboardDbContext b = new BlackboardDbContext();
-           // b.Database.ExecuteSqlCommand("SET IDENTITY_INSERT Calendars ON");
             modelBuilder.Entity<Calendar>()
                 .HasMany(c => c.Events)
                 .WithOne(a => a.Calendar)
                 .HasForeignKey(a => a.CalendarId);
 
             modelBuilder.Entity<Calendar>().HasData(
-                new Calendar { CalendarName = "Main Calendar"}
+                new Calendar {CalendarId = 1, CalendarName = "Main Calendar"}
             );
 
         }
 
         private void EventOnModelCreating(ModelBuilder modelBuilder)
         {
-           modelBuilder.Entity<Event>()
-                .HasOne(c => c.Calendar)
-                .WithMany(a => a.Events)
-                .HasForeignKey(a => a.EventId);
+
+            modelBuilder.Entity<Event>().HasData(
+                new Event {EventId=1 , CalendarId = 1, Description = "Event1", EndTime = new DateTime(2020, 01, 01), StartTime = new DateTime(2019, 01,01) },
+                new Event { EventId = 2, CalendarId = 1, Description = "Event2", EndTime = new DateTime(2020, 01, 01), StartTime = new DateTime(2019, 01, 01) },
+                new Event { EventId = 3, CalendarId = 1, Description = "Event3", EndTime = new DateTime(2020, 01, 01), StartTime = new DateTime(2019, 01, 01) }
+            );
+
         }
 
         private void GroupStudentsOnModelCreating(ModelBuilder modelBuilder)

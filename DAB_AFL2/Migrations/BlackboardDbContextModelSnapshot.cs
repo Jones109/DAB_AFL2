@@ -87,6 +87,13 @@ namespace DAB_AFL2.Migrations
                     b.HasKey("CalendarId");
 
                     b.ToTable("Calendars");
+
+                    b.HasData(
+                        new
+                        {
+                            CalendarId = 1,
+                            CalendarName = "Main Calendar"
+                        });
                 });
 
             modelBuilder.Entity("DAB_AFL2.Models.Course", b =>
@@ -532,6 +539,32 @@ namespace DAB_AFL2.Migrations
                     b.HasIndex("CalendarId");
 
                     b.ToTable("Events");
+
+                    b.HasData(
+                        new
+                        {
+                            EventId = 1,
+                            CalendarId = 1,
+                            Description = "Event1",
+                            EndTime = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            StartTime = new DateTime(2019, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            EventId = 2,
+                            CalendarId = 1,
+                            Description = "Event2",
+                            EndTime = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            StartTime = new DateTime(2019, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            EventId = 3,
+                            CalendarId = 1,
+                            Description = "Event3",
+                            EndTime = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            StartTime = new DateTime(2019, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
                 });
 
             modelBuilder.Entity("DAB_AFL2.Models.Group", b =>

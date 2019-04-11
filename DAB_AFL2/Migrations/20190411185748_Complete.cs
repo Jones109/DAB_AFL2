@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DAB_AFL2.Migrations
 {
-    public partial class complete : Migration
+    public partial class Complete : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -258,19 +258,24 @@ namespace DAB_AFL2.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "Calendars",
+                columns: new[] { "CalendarId", "CalendarName" },
+                values: new object[] { 1, "Main Calendar" });
+
+            migrationBuilder.InsertData(
                 table: "Courses",
                 columns: new[] { "CourseId", "CourseName" },
                 values: new object[,]
                 {
-                    { 1, "Course1" },
-                    { 2, "Course2" },
-                    { 3, "Course3" },
-                    { 4, "Course4" },
-                    { 5, "Course5" },
-                    { 6, "Course6" },
+                    { 9, "Course9" },
                     { 7, "Course7" },
+                    { 6, "Course6" },
+                    { 5, "Course5" },
                     { 8, "Course8" },
-                    { 9, "Course9" }
+                    { 3, "Course3" },
+                    { 2, "Course2" },
+                    { 1, "Course1" },
+                    { 4, "Course4" }
                 });
 
             migrationBuilder.InsertData(
@@ -278,12 +283,12 @@ namespace DAB_AFL2.Migrations
                 columns: new[] { "StudentID", "Birthday", "EnrollDate", "GraduateDate", "Name" },
                 values: new object[,]
                 {
+                    { 10, new DateTime(2019, 4, 11, 0, 0, 0, 0, DateTimeKind.Local), new DateTime(2019, 4, 11, 0, 0, 0, 0, DateTimeKind.Local), new DateTime(2019, 4, 11, 0, 0, 0, 0, DateTimeKind.Local), "Student10" },
                     { 15, new DateTime(2019, 4, 11, 0, 0, 0, 0, DateTimeKind.Local), new DateTime(2019, 4, 11, 0, 0, 0, 0, DateTimeKind.Local), new DateTime(2019, 4, 11, 0, 0, 0, 0, DateTimeKind.Local), "Student15" },
                     { 14, new DateTime(2019, 4, 11, 0, 0, 0, 0, DateTimeKind.Local), new DateTime(2019, 4, 11, 0, 0, 0, 0, DateTimeKind.Local), new DateTime(2019, 4, 11, 0, 0, 0, 0, DateTimeKind.Local), "Student14" },
                     { 13, new DateTime(2019, 4, 11, 0, 0, 0, 0, DateTimeKind.Local), new DateTime(2019, 4, 11, 0, 0, 0, 0, DateTimeKind.Local), new DateTime(2019, 4, 11, 0, 0, 0, 0, DateTimeKind.Local), "Student13" },
                     { 12, new DateTime(2019, 4, 11, 0, 0, 0, 0, DateTimeKind.Local), new DateTime(2019, 4, 11, 0, 0, 0, 0, DateTimeKind.Local), new DateTime(2019, 4, 11, 0, 0, 0, 0, DateTimeKind.Local), "Student12" },
                     { 11, new DateTime(2019, 4, 11, 0, 0, 0, 0, DateTimeKind.Local), new DateTime(2019, 4, 11, 0, 0, 0, 0, DateTimeKind.Local), new DateTime(2019, 4, 11, 0, 0, 0, 0, DateTimeKind.Local), "Student11" },
-                    { 10, new DateTime(2019, 4, 11, 0, 0, 0, 0, DateTimeKind.Local), new DateTime(2019, 4, 11, 0, 0, 0, 0, DateTimeKind.Local), new DateTime(2019, 4, 11, 0, 0, 0, 0, DateTimeKind.Local), "Student10" },
                     { 9, new DateTime(2019, 4, 11, 0, 0, 0, 0, DateTimeKind.Local), new DateTime(2019, 4, 11, 0, 0, 0, 0, DateTimeKind.Local), new DateTime(2019, 4, 11, 0, 0, 0, 0, DateTimeKind.Local), "Student9" },
                     { 7, new DateTime(2019, 4, 11, 0, 0, 0, 0, DateTimeKind.Local), new DateTime(2019, 4, 11, 0, 0, 0, 0, DateTimeKind.Local), new DateTime(2019, 4, 11, 0, 0, 0, 0, DateTimeKind.Local), "Student7" },
                     { 6, new DateTime(2019, 4, 11, 0, 0, 0, 0, DateTimeKind.Local), new DateTime(2019, 4, 11, 0, 0, 0, 0, DateTimeKind.Local), new DateTime(2019, 4, 11, 0, 0, 0, 0, DateTimeKind.Local), "Student6" },
@@ -318,9 +323,9 @@ namespace DAB_AFL2.Migrations
                     { 1, 0, 1, null },
                     { 2, 0, 2, null },
                     { 6, 0, 6, null },
+                    { 3, 0, 3, null },
                     { 5, 0, 5, null },
-                    { 4, 0, 4, null },
-                    { 3, 0, 3, null }
+                    { 4, 0, 4, null }
                 });
 
             migrationBuilder.InsertData(
@@ -328,27 +333,37 @@ namespace DAB_AFL2.Migrations
                 columns: new[] { "CourseId", "StudentId", "Grade", "Status" },
                 values: new object[,]
                 {
-                    { 1, 5, 0, "Active" },
-                    { 2, 6, 0, "Active" },
-                    { 3, 7, 0, "Active" },
-                    { 4, 8, 0, "Active" },
-                    { 6, 10, 0, "Active" },
                     { 8, 4, 0, "Active" },
+                    { 7, 4, 0, "Active" },
+                    { 6, 3, 0, "Active" },
+                    { 5, 3, 0, "Active" },
+                    { 4, 2, 0, "Active" },
+                    { 3, 2, 0, "Active" },
+                    { 2, 1, 0, "Active" },
+                    { 1, 1, 0, "Active" },
+                    { 3, 7, 0, "Active" },
+                    { 1, 5, 0, "Active" },
+                    { 4, 8, 0, "Active" },
+                    { 5, 9, 0, "Active" },
+                    { 6, 10, 0, "Active" },
                     { 7, 11, 0, "Active" },
                     { 8, 12, 0, "Active" },
                     { 9, 13, 0, "Active" },
                     { 1, 14, 0, "Active" },
                     { 2, 15, 0, "Active" },
                     { 3, 15, 0, "Active" },
-                    { 5, 9, 0, "Active" },
-                    { 7, 4, 0, "Active" },
-                    { 9, 5, 0, "Active" },
-                    { 5, 3, 0, "Active" },
-                    { 4, 2, 0, "Active" },
-                    { 3, 2, 0, "Active" },
-                    { 2, 1, 0, "Active" },
-                    { 1, 1, 0, "Active" },
-                    { 6, 3, 0, "Active" }
+                    { 2, 6, 0, "Active" },
+                    { 9, 5, 0, "Active" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Events",
+                columns: new[] { "EventId", "CalendarId", "Description", "EndTime", "StartTime" },
+                values: new object[,]
+                {
+                    { 1, 1, "Event1", new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2019, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 3, 1, "Event3", new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2019, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 2, 1, "Event2", new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2019, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) }
                 });
 
             migrationBuilder.InsertData(
@@ -356,15 +371,15 @@ namespace DAB_AFL2.Migrations
                 columns: new[] { "FolderId", "Course_FK", "Name", "ParentId" },
                 values: new object[,]
                 {
-                    { 1, 1, "Folder1", null },
-                    { 3, 1, "Folder3", null },
-                    { 4, 2, "Folder4", null },
-                    { 5, 2, "Folder5", null },
-                    { 2, 1, "Folder2", null },
-                    { 7, 3, "Folder7", null },
-                    { 8, 3, "Folder8", null },
                     { 9, 3, "Folder9", null },
-                    { 6, 2, "Folder6", null }
+                    { 8, 3, "Folder8", null },
+                    { 7, 3, "Folder7", null },
+                    { 6, 2, "Folder6", null },
+                    { 5, 2, "Folder5", null },
+                    { 4, 2, "Folder4", null },
+                    { 3, 1, "Folder3", null },
+                    { 2, 1, "Folder2", null },
+                    { 1, 1, "Folder1", null }
                 });
 
             migrationBuilder.InsertData(
@@ -372,17 +387,17 @@ namespace DAB_AFL2.Migrations
                 columns: new[] { "TeacherID", "CourseID" },
                 values: new object[,]
                 {
-                    { 7, 7 },
-                    { 1, 1 },
-                    { 1, 9 },
-                    { 2, 2 },
-                    { 2, 5 },
-                    { 3, 3 },
-                    { 3, 7 },
-                    { 4, 4 },
-                    { 4, 9 },
-                    { 5, 5 },
                     { 6, 6 },
+                    { 5, 5 },
+                    { 4, 9 },
+                    { 4, 4 },
+                    { 3, 7 },
+                    { 1, 1 },
+                    { 2, 5 },
+                    { 2, 2 },
+                    { 1, 9 },
+                    { 7, 7 },
+                    { 3, 3 },
                     { 8, 8 }
                 });
 
