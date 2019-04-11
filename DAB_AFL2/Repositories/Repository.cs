@@ -83,19 +83,21 @@ namespace DAB_AFL2.Repositories
             return null;
         }
 
-        public void AddStudent(int studentId, string name, DateTime birthday, DateTime enrollDate, DateTime graduateDate){
+        public async void AddStudent(string name, DateTime birthday, DateTime enrollDate, DateTime graduateDate){
         
             using (var context = new BlackboardDbContext(_options))
             {
 
-                context.Students.Add(new Student
+                Student newStudent = new Student
                 {
-                    StudentID = studentId,
                     Name = name,
                     Birthday = birthday,
-                    EnrollDate = enrollDate, 
+                    EnrollDate = enrollDate,
                     GraduateDate = graduateDate
-                });
+
+                };
+                await context.Students.AddAsync(newStudent);
+                await context.SaveChangesAsync();
             }
         }
 

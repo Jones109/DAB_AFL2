@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Runtime.CompilerServices;
 using DAB_AFL2.Data;
 using DAB_AFL2.Models;
@@ -14,10 +15,12 @@ namespace DAB_AFL2
 
     class Program
     {
-        
+
+        private static Repository rep = new Repository();
+
         static void Main(string[] args)
         {
-            Repository rep = new Repository();
+            
 
             while (true)
             {
@@ -107,10 +110,8 @@ namespace DAB_AFL2
                         switch (creationChoice)
                         {
                             case 1:
-                                
-                                Console.WriteLine("Enter StudentId");
-                                int studentId = int.Parse(Console.ReadLine());
-                                Console.WriteLine("Enter Name of the student");
+
+                                HandleAddStudent();
 
                                 Console.WriteLine(".... PRESS ANY KEY TO CONTINUE");
                                 Console.ReadKey();
@@ -141,7 +142,7 @@ namespace DAB_AFL2
 
                         }
 
-
+                            
                       
                         break;
                 }
@@ -154,5 +155,42 @@ namespace DAB_AFL2
             }
             
         }
+
+
+        private static void HandleAddStudent()
+        {
+            Console.WriteLine("Enter Name of the student");
+            string studentName = Console.ReadLine();
+
+            Console.WriteLine("Enter Students birthday '<YYYY-MM-DD>' (Optional)");
+            string birthdayString = Console.ReadLine();
+            DateTime birthday = DateTime.MinValue;
+            if (birthdayString != "")
+            {
+                birthday = DateTime.Parse(birthdayString);
+            }
+
+
+            Console.WriteLine("Enter Students Enrollment Date '<YYYY-MM-DD>' (Optional)");
+            string enrollmentDateString = Console.ReadLine();
+            DateTime enrollmentDate = DateTime.MinValue;
+            if (enrollmentDateString != "")
+            {
+                enrollmentDate = DateTime.Parse(enrollmentDateString);
+            }
+
+
+            Console.WriteLine("Enter Students Graduation Date '<YYYY-MM-DD>' (Optional)");
+            string graduationDateString = Console.ReadLine();
+            DateTime graduationDate = DateTime.MinValue;
+            if (graduationDateString != "")
+            {
+                graduationDate = DateTime.Parse(graduationDateString);
+            }
+
+
+            rep.AddStudent(studentName, birthday, enrollmentDate, graduationDate);
+        }
+
     }
 }
