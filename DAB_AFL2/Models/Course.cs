@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
+using DAB_AFL2.Models.CourseContent;
 
 namespace DAB_AFL2.Models
 {
@@ -18,8 +19,9 @@ namespace DAB_AFL2.Models
         //Many to many with Student
         public List<Enrolled> Enrolled { get; set; }
 
-
         //One to many with Assignment
         public List<Assignment> Assignments { get; set; }
+
+        public List<Folder> Folders { get; set; }
     }
 }

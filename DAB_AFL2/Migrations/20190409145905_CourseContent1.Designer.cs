@@ -4,14 +4,16 @@ using DAB_AFL2.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DAB_AFL2.Migrations
 {
     [DbContext(typeof(BlackboardDbContext))]
-    partial class BlackboardDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190409145905_CourseContent1")]
+    partial class CourseContent1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -366,25 +368,25 @@ namespace DAB_AFL2.Migrations
                         new
                         {
                             StudentID = 1,
-                            Birthday = new DateTime(2019, 4, 11, 0, 0, 0, 0, DateTimeKind.Local),
-                            EnrollDate = new DateTime(2019, 4, 11, 0, 0, 0, 0, DateTimeKind.Local),
-                            GraduateDate = new DateTime(2019, 4, 11, 0, 0, 0, 0, DateTimeKind.Local),
+                            Birthday = new DateTime(2019, 4, 9, 0, 0, 0, 0, DateTimeKind.Local),
+                            EnrollDate = new DateTime(2019, 4, 9, 0, 0, 0, 0, DateTimeKind.Local),
+                            GraduateDate = new DateTime(2019, 4, 9, 0, 0, 0, 0, DateTimeKind.Local),
                             Name = "Student1"
                         },
                         new
                         {
                             StudentID = 2,
-                            Birthday = new DateTime(2019, 4, 11, 0, 0, 0, 0, DateTimeKind.Local),
-                            EnrollDate = new DateTime(2019, 4, 11, 0, 0, 0, 0, DateTimeKind.Local),
-                            GraduateDate = new DateTime(2019, 4, 11, 0, 0, 0, 0, DateTimeKind.Local),
+                            Birthday = new DateTime(2019, 4, 9, 0, 0, 0, 0, DateTimeKind.Local),
+                            EnrollDate = new DateTime(2019, 4, 9, 0, 0, 0, 0, DateTimeKind.Local),
+                            GraduateDate = new DateTime(2019, 4, 9, 0, 0, 0, 0, DateTimeKind.Local),
                             Name = "Student2"
                         },
                         new
                         {
                             StudentID = 3,
-                            Birthday = new DateTime(2019, 4, 11, 0, 0, 0, 0, DateTimeKind.Local),
-                            EnrollDate = new DateTime(2019, 4, 11, 0, 0, 0, 0, DateTimeKind.Local),
-                            GraduateDate = new DateTime(2019, 4, 11, 0, 0, 0, 0, DateTimeKind.Local),
+                            Birthday = new DateTime(2019, 4, 9, 0, 0, 0, 0, DateTimeKind.Local),
+                            EnrollDate = new DateTime(2019, 4, 9, 0, 0, 0, 0, DateTimeKind.Local),
+                            GraduateDate = new DateTime(2019, 4, 9, 0, 0, 0, 0, DateTimeKind.Local),
                             Name = "Student3"
                         });
                 });

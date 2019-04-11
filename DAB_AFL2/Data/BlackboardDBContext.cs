@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using DAB_AFL2.Models;
+using DAB_AFL2.Models.CourseContent;
 
 namespace DAB_AFL2.Data
 {
@@ -21,6 +22,8 @@ namespace DAB_AFL2.Data
         public DbSet<GroupStudents> GroupStudents { get; set; }
 
         public Assignment Assignments { get; set; }
+        public DbSet<Area> Areas { get; set; }
+        public DbSet<Folder> Folders { get; set; }
 
 
         public BlackboardDbContext()
@@ -51,10 +54,40 @@ namespace DAB_AFL2.Data
             EnrolledOnModelCreating(modelBuilder);
             GroupStudentsOnModelCreating(modelBuilder);
             Teacher_CoursesOnModelCreating(modelBuilder);
-            EventOnModelCreating(modelBuilder);
-            CalendarOnModelCreating(modelBuilder);
+            CourseContentOnModelCreating(modelBuilder);
+
         }
 
+
+        private void CourseContentOnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Folder>()
+                .HasOne(t => t.Area)
+                .WithOne(t => t.Folder)
+                .HasForeignKey<Area>();
+
+            modelBuilder.Entity<Course>()
+                .HasMany(c => c.Folders)
+                .WithOne(a => a.Course)
+                .HasForeignKey(a => a.Course_FK);
+            
+            modelBuilder.Entity<Folder>().HasData(
+                new Folder { Course_FK = 1, Name = "Folder1", FolderId = 1 },
+                new Folder { Course_FK = 1, Name = "Folder2", FolderId = 2 },
+                new Folder { Course_FK = 1, Name = "Folder3", FolderId = 3 },
+                new Folder { Course_FK = 2, Name = "Folder4", FolderId = 4 },
+                new Folder { Course_FK = 2, Name = "Folder5", FolderId = 5 },
+                new Folder { Course_FK = 2, Name = "Folder6", FolderId = 6 },
+                new Folder { Course_FK = 3, Name = "Folder7", FolderId = 7 },
+                new Folder { Course_FK = 3, Name = "Folder8", FolderId = 8 },
+                new Folder { Course_FK = 3, Name = "Folder9", FolderId = 9 }
+            );
+
+            modelBuilder.Entity<Area>().HasData(
+                new Area { ContentUri = "SupBro", MainArea = "MainDataWithBigFont", AreaId = 1},
+                new Area { ContentUri = "SupHo", MainArea = "SubDataWithSmallerFont", Parent = "MainDataWithBigFont",AreaId = 2}
+            );
+        }
 
 
         private void TeacherOnModelCreating(ModelBuilder modelBuilder)
@@ -117,7 +150,7 @@ namespace DAB_AFL2.Data
         {
             //Seeds 3 Students in the DB
             modelBuilder.Entity<Student>().HasData(
-                new Student { StudentID = 1, Birthday = DateTime.Today,EnrollDate = DateTime.Today,GraduateDate = DateTime.Today, Name = "Student1"},
+                new Student { StudentID = 1, Birthday = DateTime.Today, EnrollDate = DateTime.Today,GraduateDate = DateTime.Today, Name = "Student1"},
                 new Student { StudentID = 2, Birthday = DateTime.Today, EnrollDate = DateTime.Today, GraduateDate = DateTime.Today, Name = "Student2" },
                 new Student { StudentID = 3, Birthday = DateTime.Today, EnrollDate = DateTime.Today, GraduateDate = DateTime.Today, Name = "Student3" }
             );
@@ -141,7 +174,7 @@ namespace DAB_AFL2.Data
             
             //Seeds 3 enrolled in the DB
             modelBuilder.Entity<Enrolled>().HasData(
-                new Enrolled { CourseId = 1,Status = "Active", StudentId = 1 },
+                new Enrolled { CourseId = 1, Status = "Active", StudentId = 1 },
                 new Enrolled { CourseId = 2, Status = "Active", StudentId = 2 },
                 new Enrolled { CourseId = 3, Status = "Active", StudentId = 3 }
             );
