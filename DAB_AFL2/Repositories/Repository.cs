@@ -80,15 +80,21 @@ namespace DAB_AFL2.Repositories
         }
         public async Task<Course> GetCourseStudentsAndTeachers(int id)
         {
-            using (var context = new BlackboardDbContext(_options))
+            if (CourseExists(id).Result)
             {
-               
-                var course = await context.Courses.Where(c => c.CourseId == id).Include(c=> c.Teacher_Courses).ThenInclude(t=> t.Teacher)
-                    .Include(c=> c.Enrolled).ThenInclude(e => e.Student).FirstAsync();
+                using (var context = new BlackboardDbContext(_options))
+                {
 
-                return course;
+                    var course = await context.Courses.Where(c => c.CourseId == id).Include(c => c.Teacher_Courses).ThenInclude(t => t.Teacher)
+                        .Include(c => c.Enrolled).ThenInclude(e => e.Student).FirstAsync();
+
+                    return course;
+                }
+
             }
-            
+
+            return null;
+
 
         }
 
@@ -96,7 +102,7 @@ namespace DAB_AFL2.Repositories
 
         public async Task<List<Course>> GetCourses(int studentId)
         {
-            if (IfAnyCourses().Result)
+            if (IfAnyCourses().Result && StudentExists(studentId).Result)
             {
                 using (var context = new BlackboardDbContext(_options))
                 {
@@ -296,7 +302,29 @@ namespace DAB_AFL2.Repositories
             }
         }
 
-         private async Task<bool> IfAnyFolders()
+        private async Task<bool> StudentExists(int id)
+        {
+            using (var context = new BlackboardDbContext(_options))
+            {
+                if (await context.Students
+                    .AnyAsync(h => h.StudentID == id))
+                    return true;
+                return false;
+            }
+        }
+
+
+        private async Task<bool> CourseExists(int id)
+        {
+            using (var context = new BlackboardDbContext(_options))
+            {
+                if (await context.Courses
+                    .AnyAsync(h => h.CourseId == id))
+                    return true;
+                return false;
+            }
+        }
+        private async Task<bool> IfAnyFolders()
          {
              using (var context = new BlackboardDbContext(_options))
              {
