@@ -68,8 +68,6 @@ namespace DAB_AFL2.Data
                 .WithOne(a => a.Course)
                 .HasForeignKey(a => a.Course_FK);
 
-
-
             modelBuilder.Entity<Folder>()
                 .HasOne(f => f.ParentFolder)
                 .WithMany()

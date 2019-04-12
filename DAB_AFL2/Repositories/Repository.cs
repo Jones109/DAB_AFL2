@@ -22,6 +22,15 @@ namespace DAB_AFL2.Repositories
                 .Options;
         }
 
+        public bool CreateDB()
+        {
+            using (var context = new BlackboardDbContext(_options))
+            {
+                context.Database.EnsureDeleted();
+                return context.Database.EnsureCreated();
+            }
+        }
+
 
         public async void Enroll(int courseId, int studentId, string status)
         {

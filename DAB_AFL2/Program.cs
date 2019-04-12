@@ -17,7 +17,19 @@ namespace DAB_AFL2
 
         static void Main(string[] args)
         {
+
+            Console.WriteLine("Creating Database......");
             Repository rep = new Repository();
+            if (rep.CreateDB())
+            {
+                Console.WriteLine("Database Created");
+            }
+            else
+            {
+                Console.WriteLine("Error in creating database");
+            }
+
+
             while (true)
             {
                 Console.Clear();
