@@ -7,6 +7,8 @@ using DAB_AFL2.Data;
 using DAB_AFL2.Models;
 using DAB_AFL2.Models.CourseContent;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Storage;
 using Remotion.Linq.Parsing.Structure.IntermediateModel;
 
 namespace DAB_AFL2.Repositories
@@ -26,7 +28,10 @@ namespace DAB_AFL2.Repositories
         {
             using (var context = new BlackboardDbContext(_options))
             {
-                context.Database.EnsureDeleted();
+                if (true && (context.GetService<IDatabaseCreator>() as RelationalDatabaseCreator).Exists())
+                    return false;
+
+                    context.Database.EnsureDeleted();
                 return context.Database.EnsureCreated();
             }
         }

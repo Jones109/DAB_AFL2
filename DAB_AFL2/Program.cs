@@ -26,9 +26,10 @@ namespace DAB_AFL2
             }
             else
             {
-                Console.WriteLine("Error in creating database");
+                Console.WriteLine("Database already exists");
             }
-
+            Console.WriteLine(".... PRESS ANY KEY TO CONTINUE");
+            Console.ReadKey();
 
             while (true)
             {
